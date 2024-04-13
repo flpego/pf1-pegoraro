@@ -17,6 +17,7 @@ export class StudentModalComponent {
     this.studentsForm = this.formBuilder.group({
       fullName: ['', [Validators.required]],
       age: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      calificacion: ['sin asignar']
     });
   }
 

@@ -32,27 +32,31 @@ export class StudentsComponent {
     'age',
     'calificacion',
     'state',
+    'edit',
   ];
   saludar(): void {
     console.log('hola');
   }
 
-  constructor(private matDialog : MatDialog) {
-
-  }
+  constructor(private matDialog: MatDialog) {}
 
   openModal(): void {
-    this.matDialog.open(StudentModalComponent).afterClosed().subscribe({
-      next: (result) => {
-        if(result) {
-          this.students = [...this.students, result]
-        }
-      }
-    })
+    this.matDialog
+      .open(StudentModalComponent)
+      .afterClosed()
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            const currentTime = new Date().getTime().toString().substring(0, 3);
+            result.id = parseInt(currentTime);
+            this.students = [...this.students, result];
+          }
+        },
+      });
   }
 
 
-
-
-
+  onDelete(studentId: number) {
+    this.students = this.students.filter((student) => student.id != studentId);
+  }
 }
