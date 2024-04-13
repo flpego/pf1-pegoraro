@@ -1,0 +1,21 @@
+<div class="modal__container">
+  <h2 mat-dialog-title>Agregar Estudiante</h2>
+  <form [formGroup]="studentsForm">
+    <div mat-dialog-content class="inputs__container">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="fullName" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Edad</mat-label>
+        <input matInput formControlName="age" />
+      </mat-form-field>
+    </div>
+  </form>
+
+
+  <div mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSaveEstudent()">Agregar</button>
+    <button mat-dialog-close mat-button color="warn">Cancelar</button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+h2 {
+    margin: .5rem;
+}
+.inputs__container {
+  display: flex;
+  flex-direction: column;
+
+  .mat-form-field {
+    margin: 0.3rem;
+
+    input {
+      &:hover {
+        border: none;
+      }
+    }
+  }
+}
+
+.mdc-notched-outline {
+  outline-color: rgb(40, 40, 224);
+}
