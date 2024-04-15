@@ -1,12 +1,32 @@
-table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+.table_container {
+  padding: 1rem;
 
-  .color_red{
-    color: red;
+}
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.color_red {
+  color: red;
+}
+.materia_info_container {
+  
+  p{
+    span{
+      font-weight: bold;
+    }
   }
+}
+
+.add_student_btn_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.1rem;
+  button {
+    background-color: rgb(116, 116, 197);
+    color: #fff;
+  }
+}

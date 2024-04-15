@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { IStudent } from '../../models/student.model';
 
 @Component({
   selector: 'app-student-modal',
@@ -12,20 +13,24 @@ export class StudentModalComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private matDialogRef: MatDialogRef<StudentModalComponent>
+    private matDialogRef: MatDialogRef<StudentModalComponent>,
+    @Inject(MAT_DIALOG_DATA) private data?: IStudent
   ) {
     this.studentsForm = this.formBuilder.group({
       fullName: ['', [Validators.required]],
       age: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      calificacion: ['sin asignar']
+      calificacion: ['sin asignar'],
     });
+    if (data) {
+      this.studentsForm.patchValue(data);
+    }
   }
 
   onSaveEstudent(): void {
     if (this.studentsForm.invalid) {
       this.studentsForm.markAllAsTouched();
     } else {
-    this.matDialogRef.close(this.studentsForm.value)
+      this.matDialogRef.close(this.studentsForm.value);
     }
   }
 }

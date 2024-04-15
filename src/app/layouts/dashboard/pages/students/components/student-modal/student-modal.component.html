@@ -29,9 +29,11 @@
   </form>
 
   <div mat-dialog-actions>
+
+    <button mat-dialog-close mat-button color="warn">Cancelar <mat-icon>cancel</mat-icon></button>
     <button mat-button color="primary" (click)="onSaveEstudent()">
-      Agregar
+      Guardar
+      <mat-icon>save</mat-icon>
     </button>
-    <button mat-dialog-close mat-button color="warn">Cancelar</button>
   </div>
 </div>

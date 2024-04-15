@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container " autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Auto-resizing sidenav</p>
     @if (showFiller) {
@@ -10,10 +10,10 @@
   </mat-drawer>
 
   <div class="example-sidenav-content">
-    <mat-toolbar color="primary">
+    <mat-toolbar class="toolbar_container">
       <mat-icon type="button" (click)="drawer.toggle()">menu</mat-icon>
 
-      <span>My Application</span>
+      <span [ngStyle]="{ 'margin': '0 25px' }">Teacher Dashboard</span>
     </mat-toolbar>
     <app-students />
   </div>
