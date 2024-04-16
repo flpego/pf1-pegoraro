@@ -17,7 +17,7 @@ export class StudentModalComponent {
     @Inject(MAT_DIALOG_DATA) private data?: IStudent
   ) {
     this.studentsForm = this.formBuilder.group({
-      fullName: ['', [Validators.required]],
+      fullName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)]],
       age: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       calificacion: ['sin asignar'],
     });
@@ -25,6 +25,15 @@ export class StudentModalComponent {
       this.studentsForm.patchValue(data);
     }
   }
+
+  get fullNameControl () {
+    return this.studentsForm.get('fullName');
+  }
+
+  get ageControl () {
+    return this.studentsForm.get('age');
+  }
+
 
   onSaveEstudent(): void {
     if (this.studentsForm.invalid) {

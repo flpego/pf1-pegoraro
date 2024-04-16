@@ -1,3 +1,10 @@
+.custom-modal-width{
+  width: 500px;
+  padding: 1rem;
+}
+form {
+  width: 100%;
+}
 h2 {
     margin: .5rem;
 }
@@ -15,6 +22,11 @@ h2 {
     }
   }
 }
+
+.shadow-red {
+  text-shadow: 1px 1px 15px red;
+}
+
 
 .mdc-notched-outline {
   outline-color: rgb(40, 40, 224);

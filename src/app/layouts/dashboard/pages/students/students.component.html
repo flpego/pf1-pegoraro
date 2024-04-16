@@ -1,7 +1,7 @@
 <div class="add_student_btn_container">
   <div class="materia_info_container">
     <p>
-      <span>Materia: </span> {{ materia }}, <span>Profesor: </span
+      <span appFont20>Materia: </span> {{ materia }}, <span appFont20>Profesor: </span
       >{{ profesor }}
     </p>
   </div>
@@ -31,9 +31,11 @@
 
     <!-- calificacion Column -->
 
-    <ng-container matColumnDef="calificacion">
+    <ng-container matColumnDef="calificaciones">
       <th mat-header-cell *matHeaderCellDef>Calificacion</th>
-      <td mat-cell *matCellDef="let element">{{ element.calificacion }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.calificacion }}
+      
+      </td>
     </ng-container>
 
     <!-- Aprobado Column -->

@@ -10,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { StudentsModule } from './pages/students/students.module';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, ],
   imports: [
     StudentsModule,
     CommonModule,

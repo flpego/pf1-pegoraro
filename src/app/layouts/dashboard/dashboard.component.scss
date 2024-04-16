@@ -26,3 +26,30 @@
    td { background-color: green};
   
 }
+
+.p_flex {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .mat-icon {
+    color:#6278b0;
+  }
+  &:hover {
+    color: #6278b0;
+    border-bottom: 1px solid #6278b0;
+  }
+}
+
+.icon-span{
+  &:hover {
+    background-color: #6278b0;
+  }
+}
+
+.toolbar_icon {
+  color: #e3e7f1;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 1px -1px 20px #8ea8eb;
+  }
+}

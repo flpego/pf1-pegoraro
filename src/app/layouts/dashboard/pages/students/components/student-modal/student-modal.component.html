@@ -1,14 +1,17 @@
-<div class="modal__container">
+<div class="modal__container custom-modal-width">
   <h2 mat-dialog-title>Agregar Estudiante</h2>
   <form [formGroup]="studentsForm">
     <div mat-dialog-content class="inputs__container">
       <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="fullName" />
+        <mat-error class="shadow-red ">{{fullNameControl?.errors| formsValidators}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Edad</mat-label>
         <input matInput formControlName="age" />
+        <mat-error class="shadow-red ">{{ageControl?.errors| formsValidators}}</mat-error>
+
       </mat-form-field>
       <mat-form-field>
         <mat-label>Asignar Calificacion</mat-label>

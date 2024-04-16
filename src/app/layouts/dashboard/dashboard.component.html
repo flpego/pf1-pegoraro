@@ -1,20 +1,30 @@
-<mat-drawer-container class="example-container " autosize>
+<mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
+    <p>Bienvenido {{ profesor }}!</p>
     @if (showFiller) {
-    <p>Lorem, ipsum dolor sit amet consectetur.</p>
+    <p class="p_flex"><mat-icon>home</mat-icon>Inicio</p>
+    <p class="p_flex"><mat-icon>nature_people</mat-icon>Cursos</p>
+    <p class="p_flex"><mat-icon>supervised_user_circle</mat-icon>Estudiantes</p>
+    <p class="p_flex"><mat-icon>calendar_today</mat-icon>Calendario</p>
+    <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
     }
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
+    <button (click)="showFiller = !showFiller" mat-raised-button class="icon-span">
+      <span *ngIf="showFiller" class="icon-span">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </span>
+     
+      <span *ngIf="!showFiller" class="icon-span">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </span>
     </button>
   </mat-drawer>
 
   <div class="example-sidenav-content">
     <mat-toolbar class="toolbar_container">
-      <mat-icon type="button" (click)="drawer.toggle()">menu</mat-icon>
+      <mat-icon type="button" class="toolbar_icon" (click)="drawer.toggle()">menu</mat-icon>
 
-      <span [ngStyle]="{ 'margin': '0 25px' }">Teacher Dashboard</span>
+      <span [ngStyle]="{ margin: '0 25px' }">Teacher Dashboard</span>
     </mat-toolbar>
-    <app-students />
+    <app-students [profesor]="profesor" />
   </div>
 </mat-drawer-container>
