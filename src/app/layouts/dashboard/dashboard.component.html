@@ -2,11 +2,14 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Bienvenido {{ profesor }}!</p>
     @if (showFiller) {
-    <p class="p_flex"><mat-icon>home</mat-icon>Inicio</p>
-    <p class="p_flex"><mat-icon>nature_people</mat-icon>Cursos</p>
-    <p class="p_flex"><mat-icon>supervised_user_circle</mat-icon>Estudiantes</p>
-    <p class="p_flex"><mat-icon>calendar_today</mat-icon>Calendario</p>
-    <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
+      <div class="sidenav_list_container  mat-drawer-animation">
+        <p class="p_flex"><mat-icon>home</mat-icon>Inicio</p>
+        <p class="p_flex"><mat-icon>nature_people</mat-icon>Cursos</p>
+        <p class="p_flex"><mat-icon>supervised_user_circle</mat-icon>Estudiantes</p>
+        <p class="p_flex"><mat-icon>calendar_today</mat-icon>Calendario academico</p>
+        <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
+      </div>
+
     }
     <button (click)="showFiller = !showFiller" mat-raised-button class="icon-span">
       <span *ngIf="showFiller" class="icon-span">

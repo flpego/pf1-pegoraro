@@ -15,6 +15,7 @@ import { StudentsModule } from './pages/students/students.module';
     StudentsModule,
     CommonModule,
     DashboardRoutingModule,
+    //importacines de angular material
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,

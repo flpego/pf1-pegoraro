@@ -13,11 +13,13 @@ import { FormsValidatorsPipe } from './pipes/forms-validators.pipe';
 import { Font20Directive } from './directives/font20.directive';
 @NgModule({
   declarations: [
+    //declaracion de Pipes
     FormsValidatorsPipe,
     Font20Directive
   ],
   imports: [CommonModule],
   exports: [
+    //importaciones de material
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
@@ -26,7 +28,9 @@ import { Font20Directive } from './directives/font20.directive';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    //importaciones de angular
     ReactiveFormsModule,
+    //importaciones de directivas y pipes
     FormsValidatorsPipe,
     Font20Directive
   ],
