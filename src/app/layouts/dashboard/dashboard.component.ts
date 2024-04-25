@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../core/services/courses.service';
-import { TeachersService } from './pages/teachers/services/teachers.service';
 import { ITeacher } from './pages/teachers/models/teacher.model';
+import { ICourse } from './pages/courses/models/course.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,25 +10,35 @@ import { ITeacher } from './pages/teachers/models/teacher.model';
 })
 export class DashboardComponent implements OnInit {
   showFiller = true;
-  constructor(private coursesService: CoursesService, private teachersService: TeachersService) {
-
+  constructor(
+    private coursesService: CoursesService,
+  ) {}
+  ngOnInit(): void {
+    this.getCourses();
+    this.getTeachers();
   }
-  teacher: ITeacher[] = [];
-  getTeacherProfile() {
+  teachers: ITeacher[] = [];
+  courses: ICourse[] = [];
+  students =[]
+  getCourses() {
     this.coursesService.getCourses().subscribe({
       next: (res) => {
-        console.log(res)
-      }
-    });
-    this.teachersService.getTeachers().subscribe({
-      next: (res) => {
-        this.teacher = res;
-        console.log(res)
-      }
+        console.log(res);
+        this.courses = res;
+      },
     });
   }
 
-  ngOnInit(): void {
-    this.getTeacherProfile();
+  getTeachers() {
+    this.coursesService.getTeachers().subscribe({
+      next: (res) => {
+        this.teachers = res;
+        console.log(res);
+      },
+    });
+  }
+
+  assignTeacherToCourse(): void {
+
   }
 }

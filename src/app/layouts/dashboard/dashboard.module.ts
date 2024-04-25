@@ -8,6 +8,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { StudentsModule } from './pages/students/students.module';
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
   declarations: [DashboardComponent, ],
@@ -20,6 +22,7 @@ import { StudentsModule } from './pages/students/students.module';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
+    MatCardModule
   ],
   exports: [DashboardComponent],
 })

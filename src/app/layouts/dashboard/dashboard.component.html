@@ -1,33 +1,68 @@
 <mat-drawer-container class="example-container" autosize>
+  <!-- SIDENAV -->
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Bienvenido {{ profesor }}!</p>
+    <p>Bienvenido !</p>
     @if (showFiller) {
-      <div class="sidenav_list_container  mat-drawer-animation">
-        <p class="p_flex"><mat-icon>home</mat-icon>Inicio</p>
-        <p class="p_flex"><mat-icon>nature_people</mat-icon>Cursos</p>
-        <p class="p_flex"><mat-icon>supervised_user_circle</mat-icon>Estudiantes</p>
-        <p class="p_flex"><mat-icon>calendar_today</mat-icon>Calendario academico</p>
-        <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
-      </div>
+    <div class="sidenav_list_container mat-drawer-animation">
+      <p class="p_flex"><mat-icon>home</mat-icon>Inicio</p>
+      <p class="p_flex"><mat-icon>nature_people</mat-icon>Cursos</p>
+      <p class="p_flex">
+        <mat-icon>supervised_user_circle</mat-icon>Estudiantes
+      </p>
+      <p class="p_flex">
+        <mat-icon>calendar_today</mat-icon>Calendario academico
+      </p>
+      <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
+    </div>
 
     }
-    <button (click)="showFiller = !showFiller" mat-raised-button class="icon-span">
+    <button
+      (click)="showFiller = !showFiller"
+      mat-raised-button
+      class="icon-span"
+    >
       <span *ngIf="showFiller" class="icon-span">
         <mat-icon>keyboard_arrow_up</mat-icon>
       </span>
-     
+
       <span *ngIf="!showFiller" class="icon-span">
         <mat-icon>keyboard_arrow_down</mat-icon>
       </span>
     </button>
   </mat-drawer>
-
+  <!-- SIDENAV -->
+  <!-- TOOLBAR -->
   <div class="example-sidenav-content">
     <mat-toolbar class="toolbar_container">
-      <mat-icon type="button" class="toolbar_icon" (click)="drawer.toggle()">menu</mat-icon>
-
-      <span [ngStyle]="{ margin: '0 25px' }">Teacher Dashboard</span>
+      <mat-icon type="button" class="toolbar_icon" (click)="drawer.toggle()"
+        >menu</mat-icon
+      >
+      <span [ngStyle]="{ margin: '0 25px' }">Admin Dashboard</span>
     </mat-toolbar>
-    <app-students [profesor]="profesor" />
+    <!-- TOOLBAR -->
+
+    <!-- Contenido que se renderiza en la vista del dash -->
+    <div class="main-container">
+      <div>
+        <h2>Comision 001</h2>
+      </div>
+      <div class="courses">
+        <h3>Materias</h3>
+        <mat-card *ngFor="let teacher of teachers">
+          <mat-card-header>
+            <mat-card-title>{{teacher.name}}</mat-card-title>
+            <mat-card-subtitle  *ngFor="let courseId of teacher.coursesTaugth">
+              Materia: {{courseId.courseName}} - Alumnos: 
+
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <!-- Contenido que se renderiza en la vista del dash -->
   </div>
 </mat-drawer-container>

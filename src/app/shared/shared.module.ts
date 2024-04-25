@@ -8,14 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { FormsValidatorsPipe } from './pipes/forms-validators.pipe';
 import { Font20Directive } from './directives/font20.directive';
 @NgModule({
   declarations: [
     //declaracion de Pipes
     FormsValidatorsPipe,
-    Font20Directive
+    Font20Directive,
   ],
   imports: [CommonModule],
   exports: [
@@ -28,11 +28,12 @@ import { Font20Directive } from './directives/font20.directive';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    
     //importaciones de angular
     ReactiveFormsModule,
     //importaciones de directivas y pipes
     FormsValidatorsPipe,
-    Font20Directive
+    Font20Directive,
   ],
 })
 export class SharedModule {}

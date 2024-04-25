@@ -4,11 +4,11 @@ export const Teachers: ITeacher[] = [
     {
         id: 1,
         name: 'Walter White',
-        coursesTaugth: 100
+        coursesTaugth: [{ id: 100, courseName: "Quimica" }]
     },
     {
         id: 2,
         name: 'Ramiro Funez',
-        coursesTaugth: 101
+        coursesTaugth:[{ id: 101, courseName: "Matematica" }] 
     }
 ]
