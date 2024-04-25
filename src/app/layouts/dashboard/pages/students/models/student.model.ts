@@ -1,6 +1,8 @@
 export interface IStudent {
     id: number,
     fullName: string,
+    email: string,
     age: number,
-    calificacion: number,
+    grade: number[],
+    courses: number[];
 }

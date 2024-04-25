@@ -1,84 +1,79 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { IStudent } from './models/student.model';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
+import { StudentsService } from './services/students.service';
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss',
 })
-export class StudentsComponent {
+export class StudentsComponent implements OnInit {
   @Input() profesor: string = '';
   materia = 'Quimica';
-
-  students: IStudent[] = [
-    {
-      id: 1,
-      fullName: 'Juan Perez',
-      age: 25,
-      calificacion: 8,
-    },
-    {
-      id: 2,
-      fullName: 'Ernesto Barros',
-      age: 23,
-      calificacion: 10,
-    },
-    {
-      id: 3,
-      fullName: 'Lucas Ibaniez',
-      age: 25,
-      calificacion: 8,
-    },
-    {
-      id: 4,
-      fullName: 'Joaquin Pereira',
-      age: 23,
-      calificacion: 10,
-    },
-    {
-      id: 5,
-      fullName: 'Ricardo For',
-      age: 23,
-      calificacion: 10,
-    },
-  ];
-
-  dataSource = new MatTableDataSource(this.students);
+  dataSource;
+  constructor(
+    private matDialog: MatDialog,
+    private studentsService: StudentsService
+  ) {
+    this.dataSource = new MatTableDataSource<IStudent>();
+  }
 
   displayedColumns: string[] = [
     'legajo',
     'fullName',
     'age',
-    'calificaciones',
+    'grade',
     'state',
     'edit',
   ];
 
-  constructor(private matDialog: MatDialog) {}
+  students: IStudent[] = [];
+
+  ngOnInit(): void {
+    this.studentsService.getStudents().subscribe({
+      next: (res) => {
+        console.log(res);
+
+        this.students = res;
+        this.dataSource = new MatTableDataSource(this.students);
+      },
+      error: (err) => {
+        //en un futuro, manjejo de errores
+        console.log(err);
+      },
+      complete: () => {
+        console.log('task completed');
+      },
+    });
+  }
 
   openModal(editingStudent?: IStudent): void {
     this.matDialog
       .open(StudentModalComponent, { data: editingStudent })
       .afterClosed()
       .subscribe({
-        next: (result) => {
-          if (result) {
+        next: (res: IStudent) => {
+          if (res) {
+            console.log(res);
             if (editingStudent) {
+              console.log(editingStudent);
               this.students = this.students.map((student) =>
                 student.id === editingStudent.id
                   ? {
                       ...student,
-                      ...result,
+                      ...res,
                     }
                   : student
               );
             } else {
               const currentTime = new Date().getTime();
-
-              result.id = currentTime;
-              this.students = [...this.students, result];
+              console.log(res);
+              console.log(this.students);
+              res.id = currentTime;
+              this.students = [...this.students, res];
+              console.log(this.students);
             }
           }
         },

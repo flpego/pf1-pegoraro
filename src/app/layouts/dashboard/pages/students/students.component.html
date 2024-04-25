@@ -1,16 +1,28 @@
 <div class="add_student_btn_container">
   <div class="materia_info_container">
     <p>
-      <span appFont20>Materia: </span> {{ materia }}, <span appFont20>Profesor: </span
-      >{{ profesor }}
+      <span appFont20>Materia: </span> {{ materia }},
+      <span appFont20>Profesor: </span>{{ profesor }}
     </p>
   </div>
-  <button mat-raised-button (click)="openModal()" class="demo-button">
-    Add Student
-  </button>
+  <div class="">
+    <button mat-raised-button (click)="openModal()" class="demo-button">
+      Add Student
+    </button>
+  </div>
+</div>
+<div>
+  <div>
+    Comisiones: <button>01</button><button>02</button><button>03</button
+    ><button>04</button>
+  </div>
 </div>
 <div class="table_container">
-  <table mat-table [dataSource]="students" class="mat-elevation-z8 table_custom">
+  <table
+    mat-table
+    [dataSource]="students"
+    class="mat-elevation-z8 table_custom"
+  >
     <!-- Legajo Column -->
 
     <ng-container matColumnDef="legajo">
@@ -31,11 +43,9 @@
 
     <!-- calificacion Column -->
 
-    <ng-container matColumnDef="calificaciones">
+    <ng-container matColumnDef="grade">
       <th mat-header-cell *matHeaderCellDef>Calificacion</th>
-      <td mat-cell *matCellDef="let element">{{ element.calificacion }}
-      
-      </td>
+      <td mat-cell *matCellDef="let element">{{ element.grade }}</td>
     </ng-container>
 
     <!-- Aprobado Column -->
@@ -44,9 +54,9 @@
       <td
         mat-cell
         *matCellDef="let element"
-        [ngClass]="element.calificacion > 6.6 ? 'aprobado' : 'desaprobado'"
+        [ngClass]="element.grade > 6.6 ? 'aprobado' : 'desaprobado'"
       >
-        <p>{{ element.calificacion > 6.6 ? "Aprobado" : "Desaprobado" }}</p>
+        <p>{{ element.grade > 6.6 ? "Aprobado" : "Desaprobado" }}</p>
       </td>
     </ng-container>
     <!-- editar Column -->
