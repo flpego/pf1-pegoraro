@@ -7,10 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsValidatorsPipe } from './pipes/forms-validators.pipe';
 import { Font20Directive } from './directives/font20.directive';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     //declaracion de Pipes
@@ -22,13 +25,15 @@ import { Font20Directive } from './directives/font20.directive';
     //importaciones de material
     MatMenuModule,
     MatButtonModule,
-    MatIconModule,
     MatTableModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatCardModule,
     //importaciones de angular
     ReactiveFormsModule,
     //importaciones de directivas y pipes

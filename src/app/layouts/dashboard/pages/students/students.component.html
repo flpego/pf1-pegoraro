@@ -1,22 +1,24 @@
 <div class="add_student_btn_container">
   <div class="materia_info_container">
     <p>
-      <span appFont20>Materia: </span> {{ materia }},
-      <span appFont20>Profesor: </span>{{ profesor }}
+      <span appFont20>Materia: </span>
+      <span *ngFor="let item of commission; let i = index">
+        <button mat-button *ngFor="let subject of item.subjects">
+          {{ subject.courseName }}
+        </button>
+      </span>
     </p>
   </div>
   <div class="">
-    <button mat-raised-button (click)="openModal()" class="demo-button">
+    <button mat-raised-button color="primary" (click)="openModal()" class="demo-button">
       Add Student
     </button>
   </div>
 </div>
-<div>
-  <div>
-    Comisiones: <button>01</button><button>02</button><button>03</button
-    ><button>04</button>
-  </div>
-</div>
+
+
+
+
 <div class="table_container">
   <table
     mat-table
@@ -41,24 +43,15 @@
       <td mat-cell *matCellDef="let element">{{ element.age }}</td>
     </ng-container>
 
-    <!-- calificacion Column -->
-
-    <ng-container matColumnDef="grade">
-      <th mat-header-cell *matHeaderCellDef>Calificacion</th>
-      <td mat-cell *matCellDef="let element">{{ element.grade }}</td>
-    </ng-container>
-
-    <!-- Aprobado Column -->
-    <ng-container matColumnDef="state">
-      <th mat-header-cell *matHeaderCellDef>Estado</th>
-      <td
-        mat-cell
-        *matCellDef="let element"
-        [ngClass]="element.grade > 6.6 ? 'aprobado' : 'desaprobado'"
-      >
-        <p>{{ element.grade > 6.6 ? "Aprobado" : "Desaprobado" }}</p>
+    <ng-container matColumnDef="subject">
+      <th mat-header-cell *matHeaderCellDef>Materia</th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngFor="let subject of element.courses">{{
+          subject.courseName
+        }}</span>
       </td>
     </ng-container>
+
     <!-- editar Column -->
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
@@ -76,6 +69,8 @@
             Delete
             <mat-icon color="warn">delete_forever</mat-icon>
           </button>
+          <button mat-menu-item  [routerLink]="element.id">
+           <mat-icon color=" primary">list_alt</mat-icon> Ver Perfil</button>
         </mat-menu>
       </td>
     </ng-container>

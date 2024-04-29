@@ -1,1 +1,23 @@
-<p>courses works!</p>
+<div>
+  <h2>Comision 001</h2>
+</div>
+<div class="courses">
+  <h3>Materias</h3>
+  <ng-container *ngFor="let item of commissions">
+    <ng-container *ngFor="let subject of item.subjects">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+             Materia: {{ subject.courseName }}
+             </mat-card-title>
+          <mat-card-subtitle >
+           Profesor:  {{subject.teacher.name}}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions [routerLink]="subject.courseName | lowercase">
+          <button mat-button>VER CURSO</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+</div>

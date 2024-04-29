@@ -10,6 +10,7 @@ import { IStudent } from '../../models/student.model';
 })
 export class StudentModalComponent {
   studentsForm: FormGroup;
+  grades: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,8 +20,10 @@ export class StudentModalComponent {
     this.studentsForm = this.formBuilder.group({
       fullName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)]],
       age: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      calificacion: ['sin asignar'],
+      grades: [this.grades[0]],
     });
+    this.studentsForm.controls['grades'].setValue(this.grades[0]);
+
     if (data) {
       this.studentsForm.patchValue(data);
     }
