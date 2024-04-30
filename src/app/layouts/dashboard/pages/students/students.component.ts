@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IStudent } from './models/student.model';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
-import { CommssionService } from '../../../../core/services/commission.service';
+import { CommissionService } from '../../../../core/services/commission.service';
 import { ICommission } from '../../../../core/models/commission.model';
 @Component({
   selector: 'app-students',
@@ -17,7 +17,7 @@ export class StudentsComponent implements OnInit {
   commission: ICommission[] = []
   constructor(
     private matDialog: MatDialog,
-    private commissionService: CommssionService
+    private commissionService: CommissionService
   ) {
     this.students = [];
     this.dataSource = new MatTableDataSource<IStudent>();
@@ -49,6 +49,8 @@ export class StudentsComponent implements OnInit {
       },
     });
   }
+
+  
 
   openModal(editingStudent?: IStudent): void {
     this.matDialog

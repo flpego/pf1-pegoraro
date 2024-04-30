@@ -8,13 +8,17 @@ import { students } from '../../layouts/dashboard/data/students.data';
 @Injectable({
   providedIn: 'root',
 })
-export class CommssionService {
+export class CommissionService {
   constructor() {}
 
   getCourses(): Observable<ICommission[]> {
     return of(COMMISSIONS).pipe(
       map((commissions) => this.assignStudents(commissions))
     );
+  }
+
+  getCourseById(id: number): Observable<ICommission | undefined> {
+    return of(COMMISSIONS.find((item) => item.subjects.some((subject) => subject.id === id)));
   }
 
   //recibe arreglo de comisiones y devuelve nuevo arreglo con cada profesor asignado asu materia

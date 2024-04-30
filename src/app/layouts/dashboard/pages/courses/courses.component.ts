@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommssionService } from '../../../../core/services/commission.service';
+import { CommissionService } from '../../../../core/services/commission.service';
 import { ICommission } from '../../../../core/models/commission.model';
 
 @Component({
@@ -11,7 +11,7 @@ export class CoursesComponent implements OnInit{
   commissions: ICommission[];
 
   constructor(
-    private commissionService: CommssionService,
+    private commissionService: CommissionService,
   ) {
     this.commissions = []
   }
@@ -25,7 +25,7 @@ export class CoursesComponent implements OnInit{
       next: (res) => {
         console.log(res);
         this.commissions = res;
-      },
+      },  
     });
   }
   
