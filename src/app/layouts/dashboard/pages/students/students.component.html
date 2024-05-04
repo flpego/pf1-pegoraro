@@ -1,14 +1,16 @@
 <div class="add_student_btn_container">
-    <div class="materia_info_container">
-  
-    </div>
-    <div class="">
-      <button mat-raised-button color="primary" (click)="openModal()" class="demo-button">
-        Add Student
-      </button>
-    </div>
+  <div class="materia_info_container"></div>
+  <div class="">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openModal()"
+      class="demo-button"
+    >
+      Add Student
+    </button>
   </div>
-
+</div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!--- Note that these columns can be defined in any order.
@@ -23,7 +25,9 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }} {{element.lastName}}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.name }} {{ element.lastName }}
+    </td>
   </ng-container>
 
   <!-- Weight Column -->
@@ -35,8 +39,8 @@
   <!-- Symbol Column -->
   <ng-container matColumnDef="grades">
     <th mat-header-cell *matHeaderCellDef>Calificaciones</th>
-    <td mat-cell *matCellDef="let element ; let i = $index">
-      {{ element.grades}}
+    <td mat-cell *matCellDef="let element; let i = $index">
+      {{ element.grades }}
     </td>
   </ng-container>
 
@@ -56,13 +60,13 @@
           Delete
           <mat-icon color="warn">delete_forever</mat-icon>
         </button>
-        <button mat-menu-item  [routerLink]="element.id">
-         <mat-icon color=" primary">list_alt</mat-icon> Ver Perfil</button>
+        <button mat-menu-item [routerLink]="element.id">
+          <mat-icon color=" primary">list_alt</mat-icon> Ver Perfil
+        </button>
       </mat-menu>
     </td>
   </ng-container>
 
-  
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

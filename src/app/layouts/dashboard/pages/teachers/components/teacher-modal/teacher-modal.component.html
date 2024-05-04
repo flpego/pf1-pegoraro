@@ -1,0 +1,42 @@
+<div class="modal__container custom-modal-width">
+    <h2 mat-dialog-title>Agregar Estudiante</h2>
+    <form [formGroup]="teacherForm">
+      <div mat-dialog-content class="inputs__container">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" />
+          <mat-error class="shadow-red ">{{nameControl?.errors| formsValidators}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error class="shadow-red ">{{lastNameControl?.errors| formsValidators}}</mat-error>
+        </mat-form-field>
+
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error class="shadow-red ">{{emailControl?.errors| formsValidators}}</mat-error>
+        </mat-form-field>
+
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Materias</mat-label>
+            <input matInput formControlName="taughtSubjects" />
+            <mat-error class="shadow-red ">{{taughtSubjectsControl?.errors| formsValidators}}</mat-error>
+          </mat-form-field>
+        
+      </div>
+    </form>
+  
+    <div mat-dialog-actions>
+  
+      <button mat-dialog-close mat-button color="warn">Cancelar <mat-icon>cancel</mat-icon></button>
+      <button mat-button color="primary" (click)="onSaveTeacher()">
+        Guardar
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
