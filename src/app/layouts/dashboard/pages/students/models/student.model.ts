@@ -1,10 +1,7 @@
-import { ISubject } from "../../../../../core/models/subject.model";
-
 export interface IStudent {
     id: number,
-    fullName: string,
+    name: string,
+    lastName: string,
     email: string,
-    age: number,
     grades: number[],
-    courses: any[];
 }

@@ -7,11 +7,7 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
-      {
-        path: 'courses',
-        loadChildren: () =>
-          import('./pages/courses/courses.module').then((m) => m.CoursesModule),
-      },
+
       {
         path: 'home',
         loadChildren: () => 
@@ -22,6 +18,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/students/students.module').then(
             (m) => m.StudentsModule
+          ),
+      },
+      {
+        path: 'teachers',
+        loadChildren: () =>
+          import('./pages/teachers/teachers.module').then(
+            (m) => m.TeachersModule
           ),
       },
     ],

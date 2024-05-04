@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { StudentsRoutingModule } from './students-routing.module';
 import { StudentsComponent } from './students.component';
-import { StudentModalComponent } from './components/student-modal/student-modal.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import { StudentComponent } from './pages/student/student.component';
+import { StudentModalComponent } from './components/student-modal/student-modal.component';
+import { StudentsDetailsComponent } from './pages/students-details/students-details.component';
 
 @NgModule({
-  declarations: [StudentsComponent, StudentModalComponent, StudentComponent],
-  imports: [
-    CommonModule,
-    StudentsRoutingModule,
-    SharedModule,
+  declarations: [
+    StudentsComponent,
+    StudentsDetailsComponent,
+    StudentModalComponent,
   ],
-  exports: [StudentsComponent],
+  imports: [CommonModule, StudentsRoutingModule, SharedModule],
 })
 export class StudentsModule {}

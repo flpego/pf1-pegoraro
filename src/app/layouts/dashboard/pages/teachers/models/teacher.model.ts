@@ -1,6 +1,8 @@
-import { ISubject } from "../../../../../core/models/subject.model";
 
 export interface ITeacher {
-    id: number;
+    id: number,
     name: string,
+    lastName: string,
+    email: string,
+    taughtSubjects: string
 }

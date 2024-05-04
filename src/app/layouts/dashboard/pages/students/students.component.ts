@@ -1,43 +1,31 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { IStudent } from './models/student.model';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { StudentsService } from './students.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
-import { CommissionService } from '../../../../core/services/commission.service';
-import { ICommission } from '../../../../core/models/commission.model';
+import { IStudent} from './models/student.model';
+
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrl: './students.component.scss',
 })
 export class StudentsComponent implements OnInit {
-  materia = 'Quimica';
-  dataSource;
+  displayedColumns: string[] = ['id', 'name', 'email', 'grades', 'edit'];
+  dataSource!: MatTableDataSource<IStudent> ;
   students: IStudent[] = [];
-  commission: ICommission[] = []
   constructor(
     private matDialog: MatDialog,
-    private commissionService: CommissionService
-  ) {
-    this.students = [];
-    this.dataSource = new MatTableDataSource<IStudent>();
-  }
-
-  displayedColumns: string[] = [
-    'legajo',
-    'fullName',
-    'age',
-    'subject',
-    'edit',
-  ];
+    private studentsService: StudentsService
+  ) {}
 
   ngOnInit(): void {
-    this.commissionService.getCourses().subscribe({
+    this.studentsService.getStudents().subscribe({
       next: (res) => {
         console.log(res);
-        this.commission = res;
-        this.students = res[0].students;
-        console.log(this.students)
+        this.students = res;
+        console.log(this.students);
         this.dataSource = new MatTableDataSource(this.students);
       },
       error: (err) => {
@@ -49,12 +37,10 @@ export class StudentsComponent implements OnInit {
       },
     });
   }
-
-  
-
   openModal(editingStudent?: IStudent): void {
+
     this.matDialog
-      .open(StudentModalComponent, { data: editingStudent })
+      .open(StudentModalComponent, { data: editingStudent ? { ...editingStudent } : undefined, })
       .afterClosed()
       .subscribe({
         next: (res: IStudent) => {
@@ -62,21 +48,30 @@ export class StudentsComponent implements OnInit {
             console.log(res);
             if (editingStudent) {
               console.log(editingStudent);
-              this.students = this.students.map((student) =>
-                student.id === editingStudent.id
-                  ? {
-                      ...student,
-                      ...res,
-                    }
-                  : student
-              );
+              // Copia las calificaciones del estudiante actual
+              const updatedGrades = [...editingStudent.grades];
+              // Agrega las nuevas calificaciones
+              for (const grade of res.grades) {
+                updatedGrades.push(grade);
+              }
+              // Actualiza las calificaciones del estudiante
+              editingStudent.grades = updatedGrades;
+          
+              // Actualiza otros campos del estudiante
+              Object.assign(editingStudent, res);
+          
+              this.dataSource = new MatTableDataSource(this.students);
+              this.updateDataSource();
+            this.dataSource = new MatTableDataSource(this.students);
             } else {
               const currentTime = new Date().getTime();
               console.log(res);
               res.id = currentTime;
               this.students = [...this.students, res];
+              this.dataSource = new MatTableDataSource(this.students);
               console.log(this.students);
             }
+           
           }
         },
       });
@@ -84,5 +79,10 @@ export class StudentsComponent implements OnInit {
 
   onDelete(studentId: number) {
     this.students = this.students.filter((student) => student.id != studentId);
+    this.dataSource = new MatTableDataSource(this.students);
+  }
+
+  updateDataSource(): void {
+    this.dataSource = new MatTableDataSource(this.students);
   }
 }

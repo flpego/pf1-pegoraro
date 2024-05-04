@@ -14,6 +14,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import {MatListModule} from '@angular/material/list'
 @NgModule({
   declarations: [
     //declaracion de Pipes
@@ -25,7 +26,6 @@ import { MatCardModule } from '@angular/material/card';
     //importaciones de material
     MatMenuModule,
     MatButtonModule,
-    MatTableModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
@@ -34,6 +34,8 @@ import { MatCardModule } from '@angular/material/card';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatTableModule,
+    MatListModule,
     //importaciones de angular
     ReactiveFormsModule,
     //importaciones de directivas y pipes

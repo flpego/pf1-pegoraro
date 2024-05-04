@@ -1,80 +1,68 @@
 <div class="add_student_btn_container">
-  <div class="materia_info_container">
-    <p>
-      <span appFont20>Materia: </span>
-      <span *ngFor="let item of commission; let i = index">
-        <button mat-button *ngFor="let subject of item.subjects">
-          {{ subject.courseName }}
-        </button>
-      </span>
-    </p>
+    <div class="materia_info_container">
+  
+    </div>
+    <div class="">
+      <button mat-raised-button color="primary" (click)="openModal()" class="demo-button">
+        Add Student
+      </button>
+    </div>
   </div>
-  <div class="">
-    <button mat-raised-button color="primary" (click)="openModal()" class="demo-button">
-      Add Student
-    </button>
-  </div>
-</div>
 
 
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
 
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
 
-<div class="table_container">
-  <table
-    mat-table
-    [dataSource]="students"
-    class="mat-elevation-z8 table_custom"
-  >
-    <!-- Legajo Column -->
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }} {{element.lastName}}</td>
+  </ng-container>
 
-    <ng-container matColumnDef="legajo">
-      <th mat-header-cell *matHeaderCellDef>Legajo No.</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
-    <!-- FullName Column -->
-    <ng-container matColumnDef="fullName">
-      <th mat-header-cell *matHeaderCellDef>Estudiante</th>
-      <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
-    </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+  </ng-container>
 
-    <!-- Age Column -->
-    <ng-container matColumnDef="age">
-      <th mat-header-cell *matHeaderCellDef>Edad</th>
-      <td mat-cell *matCellDef="let element">{{ element.age }}</td>
-    </ng-container>
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="grades">
+    <th mat-header-cell *matHeaderCellDef>Calificaciones</th>
+    <td mat-cell *matCellDef="let element ; let i = $index">
+      {{ element.grades}}
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="subject">
-      <th mat-header-cell *matHeaderCellDef>Materia</th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngFor="let subject of element.courses">{{
-          subject.courseName
-        }}</span>
-      </td>
-    </ng-container>
-
-    <!-- editar Column -->
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
-      <td mat-cell *matCellDef="let element">
-        <!-- Boton de menu desplegable -->
-        <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
-          <mat-icon>expand_circle_down</mat-icon>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Editar</th>
+    <td mat-cell *matCellDef="let element">
+      <!-- Boton de menu desplegable -->
+      <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+        <mat-icon>expand_circle_down</mat-icon>
+      </button>
+      <!-- Opciones del menu -->
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openModal(element)">
+          Editar <mat-icon>edit</mat-icon>
         </button>
-        <!-- Opciones del menu -->
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openModal(element)">
-            Editar <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-menu-item (click)="onDelete(element.id)">
-            Delete
-            <mat-icon color="warn">delete_forever</mat-icon>
-          </button>
-          <button mat-menu-item  [routerLink]="element.id">
-           <mat-icon color=" primary">list_alt</mat-icon> Ver Perfil</button>
-        </mat-menu>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-</div>
+        <button mat-menu-item (click)="onDelete(element.id)">
+          Delete
+          <mat-icon color="warn">delete_forever</mat-icon>
+        </button>
+        <button mat-menu-item  [routerLink]="element.id">
+         <mat-icon color=" primary">list_alt</mat-icon> Ver Perfil</button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

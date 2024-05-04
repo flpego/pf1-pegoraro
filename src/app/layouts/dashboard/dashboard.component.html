@@ -4,17 +4,25 @@
     <p>Bienvenido !</p>
     @if (showFiller) {
     <div class="sidenav_list_container mat-drawer-animation">
-    
       <p class="p_flex" routerLink="home"><mat-icon>home</mat-icon>Inicio</p>
-      <p class="p_flex" routerLink="courses"><mat-icon>nature_people</mat-icon>Cursos</p>
+      <p class="p_flex" routerLink="courses">
+        <mat-icon>nature_people</mat-icon>Cursos
+      </p>
       <p class="p_flex" routerLink="students">
         <mat-icon>supervised_user_circle</mat-icon>Estudiantes
+      </p>
+      <p class="p_flex" routerLink="teachers">
+        <mat-icon>work</mat-icon>
+        Profesores
+
       </p>
       <p class="p_flex">
         <mat-icon>calendar_today</mat-icon>Calendario academico
       </p>
       <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
-      <p class="p_flex" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Exit</p>
+      <p class="p_flex" (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>Exit
+      </p>
     </div>
 
     }
@@ -45,9 +53,7 @@
 
     <!-- Contenido que se renderiza en la vista del dash -->
     <div class="main-container">
-      
       <router-outlet></router-outlet>
-      
     </div>
     <!-- Contenido que se renderiza en la vista del dash -->
   </div>

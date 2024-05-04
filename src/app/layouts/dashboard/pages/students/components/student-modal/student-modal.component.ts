@@ -18,23 +18,36 @@ export class StudentModalComponent {
     @Inject(MAT_DIALOG_DATA) private data?: IStudent
   ) {
     this.studentsForm = this.formBuilder.group({
-      fullName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)]],
-      age: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      grades: [this.grades[0]],
+      name: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)]],
+      lastName: [
+        '',
+        [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
+        ],
+      ],
+      selectedGrade: [this.grades[0]]
     });
-    this.studentsForm.controls['grades'].setValue(this.grades[0]);
 
     if (data) {
       this.studentsForm.patchValue(data);
     }
   }
 
-  get fullNameControl () {
-    return this.studentsForm.get('fullName');
+  get nameControl() {
+    return this.studentsForm.get('name');
   }
 
-  get ageControl () {
-    return this.studentsForm.get('age');
+  get lastNameControl() {
+    return this.studentsForm.get('lastName');
+  }
+
+  get emailControl() {
+    return this.studentsForm.get('email');
   }
 
 
@@ -42,7 +55,11 @@ export class StudentModalComponent {
     if (this.studentsForm.invalid) {
       this.studentsForm.markAllAsTouched();
     } else {
-      this.matDialogRef.close(this.studentsForm.value);
+      const formData = this.studentsForm.value;
+      const selectedGrade = formData.selectedGrade;
+      delete formData.selectedGrade; 
+      formData.grades = [selectedGrade]; 
+      this.matDialogRef.close(formData);
     }
   }
 }
