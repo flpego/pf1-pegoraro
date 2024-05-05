@@ -1,1 +1,17 @@
-<p>auth works!</p>
+<div class="auth__main__container">
+    <div>
+        <button (click)="toggleForm()" [ngClass]="{ 'active': toggleFormViews }">
+          Registrarse
+        </button>
+        <button (click)="toggleForm()" [ngClass]="{ 'active': !toggleFormViews }">
+          Ingresar
+        </button>
+      </div>
+
+  <div *ngIf="toggleFormViews">
+    <app-register></app-register>
+  </div>
+  <div *ngIf="!toggleFormViews">
+    <app-login></app-login>
+  </div>
+</div>
