@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { IStudent } from './models/student.model';
 
 const STUDENTS = [
   {
@@ -43,10 +45,10 @@ const STUDENTS = [
   providedIn: 'root',
 })
 export class StudentsService {
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  getStudents() {
-    return of(STUDENTS);
+  getStudents(): Observable<IStudent[]> {
+    return this.httpClient.get<IStudent[]>('http://localhost:3000/students')
   }
 
   getStudentById(id: number) {

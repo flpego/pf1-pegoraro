@@ -3,28 +3,7 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Bienvenido !</p>
     @if (showFiller) {
-    <div class="sidenav_list_container mat-drawer-animation">
-      <p class="p_flex" routerLink="home"><mat-icon>home</mat-icon>Inicio</p>
-      <p class="p_flex" routerLink="courses">
-        <mat-icon>nature_people</mat-icon>Cursos
-      </p>
-      <p class="p_flex" routerLink="students">
-        <mat-icon>supervised_user_circle</mat-icon>Estudiantes
-      </p>
-      <p class="p_flex" routerLink="teachers">
-        <mat-icon>work</mat-icon>
-        Profesores
-
-      </p>
-      <p class="p_flex">
-        <mat-icon>calendar_today</mat-icon>Calendario academico
-      </p>
-      <p class="p_flex"><mat-icon>settings</mat-icon>Configuracion</p>
-      <p class="p_flex" (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>Exit
-      </p>
-    </div>
-
+    <app-sidenav></app-sidenav>
     }
     <button
       (click)="showFiller = !showFiller"
@@ -42,19 +21,18 @@
   </mat-drawer>
   <!-- SIDENAV -->
   <!-- TOOLBAR -->
-  <div class="example-sidenav-content">
-    <mat-toolbar class="toolbar_container">
-      <mat-icon type="button" class="toolbar_icon" (click)="drawer.toggle()"
-        >menu</mat-icon
-      >
-      <span [ngStyle]="{ margin: '0 25px' }">Admin Dashboard</span>
-    </mat-toolbar>
-    <!-- TOOLBAR -->
+  <mat-toolbar class="toolbar_container">
+    <mat-icon type="button" class="toolbar_icon" (click)="drawer.toggle()"
+      >menu</mat-icon
+    >
 
-    <!-- Contenido que se renderiza en la vista del dash -->
-    <div class="main-container">
-      <router-outlet></router-outlet>
-    </div>
-    <!-- Contenido que se renderiza en la vista del dash -->
+    <app-tool-bar></app-tool-bar>
+  </mat-toolbar>
+  <!-- TOOLBAR -->
+
+  <!-- Contenido que se renderiza en la vista del dash -->
+  <div class="main-container">
+    <router-outlet></router-outlet>
   </div>
+  <!-- Contenido que se renderiza en la vista del dash -->
 </mat-drawer-container>

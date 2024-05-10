@@ -5,16 +5,17 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { SharedModule } from '../../shared/shared.module';
+import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, ],
+  declarations: [DashboardComponent, ToolBarComponent, SidenavComponent ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule    
-
+    SharedModule,
   ],
   exports: [DashboardComponent],
 })

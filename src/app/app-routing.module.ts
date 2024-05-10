@@ -4,6 +4,11 @@ import { AuthComponent } from './layouts/auth/auth.component';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/auth',
+    pathMatch: "full"
+  },
+  {
     path: 'dashboard',
     loadChildren: () =>
       import('./layouts/dashboard/dashboard.module').then(
@@ -15,11 +20,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./layouts/auth/auth.module').then((m) => m.AuthModule),
   },
-  {
-    path: '',
-    redirectTo: "auth",
-    pathMatch: "full"
-  },
+
   { path: '**', redirectTo: 'auth' },
 ];
 

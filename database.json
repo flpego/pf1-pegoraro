@@ -1,0 +1,42 @@
+{
+  "tokens": [
+    {}
+  ],
+  "students": [
+    {
+      "lastname": "perez",
+      "age": "32",
+      "id": "15"
+    },
+    {
+      "id": "6e12"
+    }
+  ],
+  "teachers": [],
+  "users": [
+    {
+      "userName": "jperez",
+      "name": "juan",
+      "lastname": "perez",
+      "email": "jpperez@test.com",
+      "password": "1234ar",
+      "role": "STUDENT" 
+    },
+    {
+      "userName": "luAn",
+      "name": "lucia",
+      "lastname": "Andre",
+      "email": "luandre@test.com",
+      "password": "1234ar",
+      "role": "TEACHER" 
+    },
+    {
+      "userName": "rodriguez",
+      "name": "carlos",
+      "lastname": "rodriguez",
+      "email": "carrod@test.com",
+      "password": "1234ar",
+      "role": "ADMIN" 
+    }
+  ]
+}
