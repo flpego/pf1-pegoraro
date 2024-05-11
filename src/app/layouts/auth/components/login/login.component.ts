@@ -18,11 +18,16 @@ export class LoginComponent {
     private authService: AuthService
   ) {
     this.loginForm = this.loginFormBuilder.group({
-      userName: ['', Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)],
+      userName: [
+        '',
+        [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)],
+      ],
       password: [
         '',
-        Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+        ],
       ],
     });
   }
@@ -35,30 +40,13 @@ export class LoginComponent {
     return this.loginForm.get('password');
   }
 
-  login(event: Event) {
-    event.preventDefault();
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-    } else {
-      console.log('usuario inicio seseion');
-      const username = this.loginForm.get('userName')?.value;
-      const password = this.loginForm.get('password')?.value;
-      const observer: Observer<any> = {
-        next: (user) => {
-          console.log(user);
-          this.router.navigate(['dashboard']);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => {
-          // Puedes manejar el comportamiento cuando la operación se complete, si es necesario
-        },
-      };
-
-      // Suscribirse al servicio de autenticación con el objeto Observer
-      this.authService.login(username, password).subscribe(observer);
+  loginUser(){
+    if(this.loginForm.valid){
+      console.log("user inicio sesion");
+      this.router.navigateByUrl("/dashboard");
+      this.loginForm.reset()
+    }else{
+      alert("User y/o password incorrecta")
     }
-    this.router.navigate(['dasboard']);
   }
 }

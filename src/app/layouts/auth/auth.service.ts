@@ -19,9 +19,11 @@ export class AuthService{
         .pipe(
             map((res) => {
                 this.loggedIn = true;
+                console.log(res)
                 return res;
             }),
             catchError((error) => {
+                console.log(error)
                 return error;
             })
         );
@@ -33,6 +35,7 @@ export class AuthService{
 
     isLoggedIn(): boolean {
         // Retorna el estado actual de autenticación del usuario
+        console.log(this.loggedIn)
         return this.loggedIn;
     }
 }
