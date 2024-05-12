@@ -3,10 +3,23 @@
     <mat-form-field>
       <mat-label>Username</mat-label>
       <input matInput formControlName="userName" />
+      <div
+        *ngIf="UserNameControl?.invalid && (UserNameControl?.dirty || UserNameControl?.touched)"
+        class="alert"
+      >
+        <div *ngIf="UserNameControl?.errors">Solo letras</div>
+        <div *ngIf="UserNameControl?.errors?.['required']">
+          El username es requerido
+        </div>
+      </div>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
       <button
         mat-icon-button
         matSuffix
@@ -16,7 +29,18 @@
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
+
+      <div
+      *ngIf="PasswordControl?.invalid && (PasswordControl?.dirty || PasswordControl?.touched)"
+      class="alert"
+    >
+      <div *ngIf="PasswordControl?.errors?.['required']">
+        La password es requerida
+      </div>
+    </div>
     </mat-form-field>
-    <button type="submit" mat-button color="primary" (click)="loginUser()">Login</button>
+    <button type="submit" mat-button color="primary" (click)="loginUser()">
+      Login
+    </button>
   </form>
 </div>
