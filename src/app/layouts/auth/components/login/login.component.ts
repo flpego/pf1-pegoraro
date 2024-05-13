@@ -50,6 +50,7 @@ export class LoginComponent {
           console.log(userData);
         },
         error: (error) => {
+          this.errorMessage = error;
           console.log(error);
         },
         complete: () => {
