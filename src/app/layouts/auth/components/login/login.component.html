@@ -1,6 +1,6 @@
 <div class="login__form__container">
   {{errorMessage}}
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> 
     <mat-form-field>
       <mat-label>Username</mat-label>
       <input matInput formControlName="userName" />
@@ -40,7 +40,7 @@
       </div>
     </div>
     </mat-form-field>
-    <button type="submit" mat-button color="primary" (click)="loginUser()">
+    <button type="submit" mat-button color="primary" >
       Login
     </button>
   </form>

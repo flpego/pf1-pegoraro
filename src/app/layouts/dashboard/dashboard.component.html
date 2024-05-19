@@ -1,7 +1,9 @@
 <mat-drawer-container class="example-container" autosize>
   <!-- SIDENAV -->
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Bienvenido !</p>
+    <div *ngIf="userLoginOn">
+      <h1>Bienvenido {{ user?.name }}!</h1>
+    </div>
     @if (showFiller) {
     <app-sidenav></app-sidenav>
     }
@@ -32,6 +34,12 @@
 
   <!-- Contenido que se renderiza en la vista del dash -->
   <div class="main-container">
+    <div *ngIf="user">
+      
+      <p>Email: {{ user.email }}</p>
+      <p>Role: {{ user.role }}</p>
+      <button (click)="logout()">Logout</button>
+    </div>
     <router-outlet></router-outlet>
   </div>
   <!-- Contenido que se renderiza en la vista del dash -->

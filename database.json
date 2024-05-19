@@ -14,7 +14,7 @@
   ],
   "teachers": [],
   "users": [
-    {
+    { "id": "1234",
       "userName": "jperez",
       "name": "juan",
       "lastname": "perez",
@@ -22,7 +22,7 @@
       "password": "1234ar",
       "role": "STUDENT" 
     },
-    {
+    { "id": "12",
       "userName": "luAn",
       "name": "lucia",
       "lastname": "Andre",
@@ -30,7 +30,7 @@
       "password": "1234ar",
       "role": "TEACHER" 
     },
-    {
+    { "id": "123",
       "userName": "rodriguez",
       "name": "carlos",
       "lastname": "rodriguez",
