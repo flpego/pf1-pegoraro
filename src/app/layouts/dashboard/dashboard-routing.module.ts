@@ -3,13 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { StudentsComponent } from './pages/students/students.component';
+import { authGuard } from '../../core/guards/auth.guard';
+import { userGuard } from '../../core/guards/user.guard';
 
 const routes: Routes = [
 
   {
     path: '',
     component: DashboardComponent,
+    canActivateChild: [authGuard],
     children: [
+
       {
         path: 'home',
         component: HomeComponent,
@@ -29,6 +33,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/teachers/teachers.module').then(
             (m) => m.TeachersModule
+          ),
+      },
+      {
+        path: 'users',
+        canActivate: [userGuard],
+        loadChildren: () =>
+          import('./pages/users/users.module').then(
+            (m) => m.UsersModule
           ),
       },
     ],

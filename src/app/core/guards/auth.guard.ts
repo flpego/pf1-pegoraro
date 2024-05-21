@@ -4,7 +4,6 @@ import { AuthService } from '../../layouts/auth/auth.service';
 import { map } from 'rxjs';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  console.log('auth guard');
 
   const router = inject(Router);
   const authService = inject(AuthService);
@@ -19,5 +18,4 @@ export const authGuard: CanActivateFn = (route, state) => {
     })
   );
 
-  // return true;
 };

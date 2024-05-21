@@ -17,7 +17,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loggedIn$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    this.hasUser()
+  );
   userData$: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(
     null
   );
@@ -25,8 +27,24 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
+  //defino funcion que retorna un boolean para determinar si hay user
+  private hasUser(): boolean {
+    return !!localStorage.getItem('user');
+  }
+
+  private getUserFromLocalStore(): IUser | null {
+    const user = localStorage.getItem('user');
+    //expresion ternaria, si hay user...
+    return user ? JSON.parse(user) : null;
+  }
+
+  private setUserToLocalStorage(user: IUser | null) {
+    return user
+      ? localStorage.setItem('user', JSON.stringify(user))
+      : localStorage.removeItem('user');
+  }
+
   login(credentials: LoginRequest): Observable<IUser | null> {
-    console.log(credentials);
     return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`).pipe(
       map((users) => {
         const user = users.find(
@@ -37,6 +55,7 @@ export class AuthService {
         if (user) {
           this.userData$.next(user);
           this.loggedIn$.next(true);
+          this.setUserToLocalStorage(user);
           return user;
         } else {
           return null;
@@ -51,7 +70,8 @@ export class AuthService {
   logout(): void {
     this.loggedIn$.next(false);
     this.userData$.next(null);
-    this.router.navigate(['auth'])
+    this.setUserToLocalStorage(null);
+    this.router.navigate(['auth']);
   }
 
   //manejo de errores

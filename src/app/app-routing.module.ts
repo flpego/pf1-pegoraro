@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [authGuard],
+    canActivateChild: [authGuard],
     loadChildren: () =>
       import('./layouts/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -17,6 +18,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./layouts/auth/auth.module').then((m) => m.AuthModule),
   },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
   { path: '**', redirectTo: 'auth' },
 ];

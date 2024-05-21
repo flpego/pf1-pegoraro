@@ -7,11 +7,11 @@
       <a routerLink="courses"><mat-icon>nature_people</mat-icon>Cursos</a>
     </li>
     <li class="li__flex">
-      <a routerLink="stufents"
+      <a routerLink="students"
         ><mat-icon>supervised_user_circle</mat-icon>Estudiantes</a
       >
     </li>
-    <li class="li__flex">
+    <li class="li__flex" *ngIf="user?.role === 'ADMIN'">
       <a routerLink="teachers"> <mat-icon>work</mat-icon> Profesores</a>
     </li>
     <li class="li__flex">
@@ -19,6 +19,9 @@
     </li>
     <li class="li__flex">
       <a><mat-icon>calendar_today</mat-icon>Calendario academico</a>
+    </li>
+    <li class="li__flex">
+      <a routerLink="users"><mat-icon>supervisor_account</mat-icon>Users</a>
     </li>
     <li class="li__flex">
       <a (click)="logout()"><mat-icon>exit_to_app</mat-icon>Exit</a>
