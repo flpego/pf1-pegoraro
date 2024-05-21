@@ -3,8 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { StudentsService } from './students.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
-import { IStudent} from './models/student.model';
-
+import { IStudent } from './models/student.model';
 
 @Component({
   selector: 'app-students',
@@ -13,7 +12,7 @@ import { IStudent} from './models/student.model';
 })
 export class StudentsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'email', 'grades', 'edit'];
-  dataSource!: MatTableDataSource<IStudent> ;
+  dataSource!: MatTableDataSource<IStudent>;
   students: IStudent[] = [];
   constructor(
     private matDialog: MatDialog,
@@ -38,14 +37,14 @@ export class StudentsComponent implements OnInit {
     });
   }
   openModal(editingStudent?: IStudent): void {
-
     this.matDialog
-      .open(StudentModalComponent, { data: editingStudent ? { ...editingStudent } : undefined, })
+      .open(StudentModalComponent, {
+        data: editingStudent ? { ...editingStudent } : undefined,
+      })
       .afterClosed()
       .subscribe({
         next: (res: IStudent) => {
           if (res) {
-            console.log(res);
             if (editingStudent) {
               console.log(editingStudent);
               // Copia las calificaciones del estudiante actual
@@ -56,22 +55,23 @@ export class StudentsComponent implements OnInit {
               }
               // Actualiza las calificaciones del estudiante
               editingStudent.grades = updatedGrades;
-          
+
               // Actualiza otros campos del estudiante
               Object.assign(editingStudent, res);
-          
+
               this.dataSource = new MatTableDataSource(this.students);
               this.updateDataSource();
-            this.dataSource = new MatTableDataSource(this.students);
+              this.dataSource = new MatTableDataSource(this.students);
             } else {
-              const currentTime = new Date().getTime();
-              console.log(res);
-              res.id = currentTime;
-              this.students = [...this.students, res];
+              this.studentsService.addStudent(res).subscribe({
+                next: (newStudent) => {
+                  this.students = [...this.students, newStudent];
+                  this.dataSource = new MatTableDataSource(this.students);
+                },
+              });
               this.dataSource = new MatTableDataSource(this.students);
               console.log(this.students);
             }
-           
           }
         },
       });

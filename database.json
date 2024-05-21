@@ -1,42 +1,57 @@
 {
   "tokens": [
-    {}
+    {
+      "id": "41eb"
+    }
   ],
   "students": [
     {
-      "lastname": "perez",
-      "age": "32",
-      "id": "15"
+      "id": "386f",
+      "name": "asd",
+      "lastName": "dsasd",
+      "email": "asd@asd.com",
+      "grades": [
+        6
+      ]
     },
     {
-      "id": "6e12"
+      "id": "043a",
+      "name": "asd",
+      "lastName": "asd",
+      "email": "text@asdas.com",
+      "grades": [
+        5
+      ]
     }
   ],
   "teachers": [],
   "users": [
-    { "id": "1234",
+    {
+      "id": "1234",
       "userName": "jperez",
       "name": "juan",
       "lastname": "perez",
       "email": "jpperez@test.com",
       "password": "1234ar",
-      "role": "STUDENT" 
+      "role": "STUDENT"
     },
-    { "id": "12",
+    {
+      "id": "12",
       "userName": "luAn",
       "name": "lucia",
       "lastname": "Andre",
       "email": "luandre@test.com",
       "password": "1234ar",
-      "role": "TEACHER" 
+      "role": "TEACHER"
     },
-    { "id": "123",
+    {
+      "id": "123",
       "userName": "rodriguez",
       "name": "carlos",
       "lastname": "rodriguez",
       "email": "carrod@test.com",
       "password": "1234ar",
-      "role": "ADMIN" 
+      "role": "ADMIN"
     }
   ]
 }

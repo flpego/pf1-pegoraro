@@ -17,13 +17,16 @@ export class StudentsDetailsComponent {
     private router: Router,
     private studentsService: StudentsService
   ) {
+
+
     this.student$ = this.studentsService.getStudentById(
       parseInt(this.activatedRoute.snapshot.params['id'])
     );
+
+    
   }
 
   calculateProm(num: number[]) {
-
     const total1 = num.reduce((acc, total) => acc + total);
     return total1/num.length
   }

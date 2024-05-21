@@ -5,7 +5,7 @@ import { map } from 'rxjs';
 
 export const userGuard: CanActivateFn = (route, state) => {
 
-  const  authService = inject(AuthService);
+  const authService = inject(AuthService);
   const router = inject(Router)
 
   return authService.userData$.pipe(

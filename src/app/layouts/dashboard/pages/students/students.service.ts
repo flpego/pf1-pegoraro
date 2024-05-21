@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IStudent } from './models/student.model';
+import { CreateStudentPayload, IStudent } from './models/student.model';
+import { IUser } from '../users/models/user.model';
 
 const STUDENTS = [
   {
@@ -45,13 +46,19 @@ const STUDENTS = [
   providedIn: 'root',
 })
 export class StudentsService {
+  private baseUrl = 'http://localhost:3000';
+
   constructor(private httpClient: HttpClient) {}
 
   getStudents(): Observable<IStudent[]> {
-    return this.httpClient.get<IStudent[]>('http://localhost:3000/students')
+    return this.httpClient.get<IStudent[]>(`${this.baseUrl}/students`);
   }
 
   getStudentById(id: number) {
     return of(STUDENTS.find((student) => student.id === id));
+  }
+
+  addStudent(payload: CreateStudentPayload): Observable<IStudent> {
+    return this.httpClient.post<IStudent>(`${this.baseUrl}/students`, payload);
   }
 }
