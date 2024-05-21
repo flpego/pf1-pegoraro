@@ -10,6 +10,7 @@ import { ITeacher } from '../../models/teacher.model';
 })
 export class TeacherModalComponent {
   teacherForm: FormGroup;
+  
 
   constructor(
     private formBuilder: FormBuilder,

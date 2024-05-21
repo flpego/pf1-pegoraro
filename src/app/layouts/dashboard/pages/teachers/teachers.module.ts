@@ -12,6 +12,7 @@ import { TeacherModalComponent } from './components/teacher-modal/teacher-modal.
     TeachersComponent,
     TeacherModalComponent
   ],
+  
   imports: [
     CommonModule,
     TeachersRoutingModule,

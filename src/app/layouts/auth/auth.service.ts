@@ -32,7 +32,7 @@ export class AuthService {
     return !!localStorage.getItem('user');
   }
 
-  private getUserFromLocalStore(): IUser | null {
+   getUserFromLocalStore(): IUser | null {
     const user = localStorage.getItem('user');
     //expresion ternaria, si hay user...
     return user ? JSON.parse(user) : null;
