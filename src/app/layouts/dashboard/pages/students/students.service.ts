@@ -49,16 +49,27 @@ export class StudentsService {
   private baseUrl = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) {}
-
+  //read
   getStudents(): Observable<IStudent[]> {
     return this.httpClient.get<IStudent[]>(`${this.baseUrl}/students`);
   }
-
+  //get student by id
   getStudentById(id: number) {
     return of(STUDENTS.find((student) => student.id === id));
   }
-
+  //creat
   addStudent(payload: CreateStudentPayload): Observable<IStudent> {
     return this.httpClient.post<IStudent>(`${this.baseUrl}/students`, payload);
+  }
+  //update
+  editStudent(id: string, student: IStudent): Observable<IStudent> {
+    return this.httpClient.put<IStudent>(
+      `${this.baseUrl}/students/${id}`,
+      student
+    );
+  }
+  //delete
+  deleteStudent(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}/students/${id}`);
   }
 }

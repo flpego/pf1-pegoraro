@@ -6,13 +6,13 @@
   ],
   "students": [
     {
-      "id": "386f",
-      "name": "asd",
-      "lastName": "dsasd",
+      "name": "juan",
+      "lastName": "perez",
       "email": "asd@asd.com",
       "grades": [
-        6
-      ]
+        3
+      ],
+      "id": "386f"
     },
     {
       "id": "043a",

@@ -20,6 +20,29 @@ export class StudentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadStudents();
+  }
+  openModal(editingStudent?: IStudent): void {
+    this.matDialog
+      .open(StudentModalComponent, {
+        data: editingStudent ? { ...editingStudent } : undefined,
+      })
+      .afterClosed()
+      .subscribe({
+        next: (res: IStudent) => {
+          if (res) {
+            if (editingStudent) {
+              this.updateStudent(editingStudent.id, res);
+            } else {
+              this.addNewStudent(res);
+            }
+          }
+        },
+      });
+  }
+
+  //metodo para cargar los studiantes
+  loadStudents(): void {
     this.studentsService.getStudents().subscribe({
       next: (res) => {
         console.log(res);
@@ -36,52 +59,40 @@ export class StudentsComponent implements OnInit {
       },
     });
   }
-  openModal(editingStudent?: IStudent): void {
-    this.matDialog
-      .open(StudentModalComponent, {
-        data: editingStudent ? { ...editingStudent } : undefined,
-      })
-      .afterClosed()
-      .subscribe({
-        next: (res: IStudent) => {
-          if (res) {
-            if (editingStudent) {
-              console.log(editingStudent);
-              // Copia las calificaciones del estudiante actual
-              const updatedGrades = [...editingStudent.grades];
-              // Agrega las nuevas calificaciones
-              for (const grade of res.grades) {
-                updatedGrades.push(grade);
-              }
-              // Actualiza las calificaciones del estudiante
-              editingStudent.grades = updatedGrades;
 
-              // Actualiza otros campos del estudiante
-              Object.assign(editingStudent, res);
-
-              this.dataSource = new MatTableDataSource(this.students);
-              this.updateDataSource();
-              this.dataSource = new MatTableDataSource(this.students);
-            } else {
-              this.studentsService.addStudent(res).subscribe({
-                next: (newStudent) => {
-                  this.students = [...this.students, newStudent];
-                  this.dataSource = new MatTableDataSource(this.students);
-                },
-              });
-              this.dataSource = new MatTableDataSource(this.students);
-              console.log(this.students);
-            }
-          }
-        },
-      });
+  //metodo para agregar nuevo studiante
+  private addNewStudent(newStudent: IStudent): void {
+    this.studentsService.addStudent(newStudent).subscribe({
+      next: (newStudentData) => {
+        this.students = [...this.students, newStudent];
+        this.updateDataSource();
+      },
+    });
+  }
+  //metodo para actualizar estudiante
+ updateStudent(id: string, editingStudent: IStudent ): void {
+    this.studentsService.editStudent(id, editingStudent).subscribe({
+      next: (res) => {
+        this.students = this.students.map((student) => student.id === id ? res : student);
+        this.updateDataSource()
+      }
+    })
+    
   }
 
-  onDelete(studentId: number) {
-    this.students = this.students.filter((student) => student.id != studentId);
-    this.dataSource = new MatTableDataSource(this.students);
+  //implementar protocolo htttp para eliminar
+  onDelete(studentId: string) {
+   this.studentsService.deleteStudent(studentId).subscribe({
+    next: () => {
+      this.students = this.students.filter(student => student.id !== studentId);
+      this.updateDataSource();
+    },
+    error: (err) => {
+      console.error('Error al eliminar el estudiante', err);
+    }
+   })
   }
-
+  //metodo para actualizar la tabla
   updateDataSource(): void {
     this.dataSource = new MatTableDataSource(this.students);
   }

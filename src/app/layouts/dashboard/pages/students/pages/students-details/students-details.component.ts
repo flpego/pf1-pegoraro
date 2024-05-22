@@ -10,7 +10,7 @@ import { IStudent } from '../../models/student.model';
   styleUrl: './students-details.component.scss',
 })
 export class StudentsDetailsComponent {
-  student$: Observable<IStudent | undefined>;
+  // student$: Observable<IStudent | undefined>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,9 +19,9 @@ export class StudentsDetailsComponent {
   ) {
 
 
-    this.student$ = this.studentsService.getStudentById(
-      parseInt(this.activatedRoute.snapshot.params['id'])
-    );
+    // this.student$ = this.studentsService.getStudentById(
+    //   parseInt(this.activatedRoute.snapshot.params['id'])
+    // );
 
     
   }
