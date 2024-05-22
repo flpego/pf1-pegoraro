@@ -6,12 +6,14 @@ import { StudentsComponent } from './students.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
 import { StudentsDetailsComponent } from './pages/students-details/students-details.component';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 @NgModule({
   declarations: [
     StudentsComponent,
     StudentsDetailsComponent,
     StudentModalComponent,
+    StudentDetailsComponent,
   ],
   imports: [CommonModule, StudentsRoutingModule, SharedModule],
 })

@@ -10,7 +10,17 @@
       "lastName": "perez",
       "email": "asd@asd.com",
       "grades": [
-        3
+        3,
+        {
+          "title": "tp 1",
+          "grade": 99,
+          "createdAt": "2024-05-22T20:10:22.566Z"
+        },
+        {
+          "title": "tarea 1",
+          "grade": 45,
+          "createdAt": "2024-05-22T20:24:20.077Z"
+        }
       ],
       "id": "386f"
     },

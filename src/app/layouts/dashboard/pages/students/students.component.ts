@@ -4,6 +4,7 @@ import { StudentsService } from './students.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentModalComponent } from './components/student-modal/student-modal.component';
 import { IStudent } from './models/student.model';
+import { StudentDetailsComponent } from './components/student-details/student-details.component';
 
 @Component({
   selector: 'app-students',
@@ -11,7 +12,7 @@ import { IStudent } from './models/student.model';
   styleUrl: './students.component.scss',
 })
 export class StudentsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'email', 'grades', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'edit'];
   dataSource!: MatTableDataSource<IStudent>;
   students: IStudent[] = [];
   constructor(
@@ -39,6 +40,10 @@ export class StudentsComponent implements OnInit {
           }
         },
       });
+  }
+
+  openStudentDetails(student?: IStudent):void {
+    this.matDialog.open(StudentDetailsComponent,{ data: { student }}) 
   }
 
   //metodo para cargar los studiantes

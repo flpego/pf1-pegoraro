@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: 'students',
         component: StudentsComponent,
-        canActivate: [userGuard],
+        // canActivate: [userGuard],
         loadChildren: () =>
           import('./pages/students/students.module').then(
             (m) => m.StudentsModule
