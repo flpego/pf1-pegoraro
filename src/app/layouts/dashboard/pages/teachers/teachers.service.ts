@@ -1,55 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-
-const TEACHERS = [
-  {
-    id: 1,
-    name: 'Juan',
-    lastName: 'Perez',
-    email: 'juanp@test.com',
-    taughtSubjects: 'Anatomia'
-  },
-  {
-    id: 2,
-    name: 'Danila',
-    lastName: 'Gonzales',
-    email: 'danilag@test.com',
-    taughtSubjects: 'Fisiologia'
-  },
-  {
-    id: 3,
-    name: 'Pedro',
-    lastName: 'Balverde',
-    email: 'pedrob@test.com',
-    taughtSubjects: 'Motricidad 1'
-  },
-  {
-    id: 4,
-    name: 'Lucia',
-    lastName: 'Luz',
-    email: 'luluz@test.com',
-    taughtSubjects: 'Direccion de gimnasios'
-  },
-  {
-    id: 5,
-    name: 'Lucas',
-    lastName: 'Perez',
-    email: 'lucape@test.com',
-    taughtSubjects: 'Biomecanica'
-  },
-];
+import { Observable } from 'rxjs';
+import { ITeacher } from './models/teacher.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeachersService {
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  getTeachers() {
-    return of(TEACHERS);
+  private baseUrl = 'http://localhost:3000'; 
+
+  getTeachers(): Observable<ITeacher[]> {
+    return this.httpClient.get<ITeacher[]>(`${this.baseUrl}/teachers`);
   }
 
-  getStudentById(id: number) {
-    return of(TEACHERS.find((student) => student.id === id));
+  getTeacherById(id: string): Observable<ITeacher> {
+    return this.httpClient.get<ITeacher>(`${this.baseUrl}/teachers/${id}`);
+  }
+
+  addTeacher(teacher: ITeacher): Observable<ITeacher> {
+    return this.httpClient.post<ITeacher>(`${this.baseUrl}/teachers`, teacher);
+  }
+
+  updateTeacher(id: string, teacher: ITeacher): Observable<ITeacher> {
+    return this.httpClient.put<ITeacher>(`${this.baseUrl}/teachers/${id}`, teacher);
+  }
+
+  deleteTeacher(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}/teachers/${id}`);
   }
 }

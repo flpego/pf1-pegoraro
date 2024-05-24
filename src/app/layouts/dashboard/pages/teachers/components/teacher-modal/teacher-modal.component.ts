@@ -10,7 +10,6 @@ import { ITeacher } from '../../models/teacher.model';
 })
 export class TeacherModalComponent {
   teacherForm: FormGroup;
-  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -18,7 +17,7 @@ export class TeacherModalComponent {
     @Inject(MAT_DIALOG_DATA) private data?: ITeacher
   ) {
     this.teacherForm = this.formBuilder.group({
-      name: ['', Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)],
+      name: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)]],
       lastName: [
         '',
         [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/i)],
@@ -32,11 +31,10 @@ export class TeacherModalComponent {
       ],
       taughtSubjects: ['', [Validators.required]],
     });
-    if(data){
-      this.teacherForm.patchValue(data)
+    if (data) {
+      this.teacherForm.patchValue(data);
     }
   }
-
 
   get nameControl() {
     return this.teacherForm.get('name');
@@ -51,7 +49,7 @@ export class TeacherModalComponent {
   }
 
   get taughtSubjectsControl() {
-    return this.teacherForm.get('taughtSubjects')
+    return this.teacherForm.get('taughtSubjects');
   }
 
   onSaveTeacher(): void {
@@ -59,11 +57,7 @@ export class TeacherModalComponent {
       this.teacherForm.markAllAsTouched();
     } else {
       const formData = this.teacherForm.value;
-      const selectedGrade = formData.selectedGrade;
-      delete formData.selectedGrade; 
-      formData.grades = [selectedGrade]; 
       this.matDialogref.close(formData);
     }
   }
-
 }

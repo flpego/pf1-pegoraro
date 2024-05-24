@@ -77,7 +77,22 @@
       ]
     }
   ],
-  "teachers": [],
+  "teachers": [
+    {
+      "id": "6315",
+      "name": "Juan",
+      "lastName": "perez",
+      "email": "jp@asd.com",
+      "taughtSubjects": "Quimica"
+    },
+    {
+      "id": "50de",
+      "name": "carlos",
+      "lastName": "gonzalez",
+      "email": "cargo@test.com",
+      "taughtSubjects": "Biomecanica 1"
+    }
+  ],
   "users": [
     {
       "id": "1234",

@@ -11,48 +11,89 @@ import { TeacherModalComponent } from './components/teacher-modal/teacher-modal.
   styleUrl: './teachers.component.scss',
 })
 export class TeachersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'email', 'taughtSubjects', 'edit'];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'email',
+    'taughtSubjects',
+    'edit',
+  ];
   teachers: ITeacher[] = [];
-  dataSource!: MatTableDataSource<ITeacher> ;
+  dataSource!: MatTableDataSource<ITeacher>;
 
-  constructor(private teachersService: TeachersService, private matDialog: MatDialog) {}
+  constructor(
+    private teachersService: TeachersService,
+    private matDialog: MatDialog
+  ) {}
+
+  loadTeachers(): void {
+    this.teachersService.getTeachers().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.teachers = res;
+        console.log(this.teachers);
+        this.updateDataSource();
+      },
+      error: (err) => {
+        //en un futuro, manjejo de errores
+        console.log(err);
+      },
+      complete: () => {
+        console.log('task completed');
+      },
+    });
+  }
+
+  private addNewTeacher(newTeacher: ITeacher): void {
+    this.teachersService.addTeacher(newTeacher).subscribe({
+      next: (newStudentData) => {
+        this.teachers = [...this.teachers, newTeacher];
+        this.loadTeachers();
+      },
+    });
+  }
+
+  onDelete(teacherId: string) {
+    this.teachersService.deleteTeacher(teacherId).subscribe({
+     next: () => {
+       this.teachers = this.teachers.filter(teacher => teacher.id !== teacherId);
+       this.updateDataSource();
+     },
+     error: (err) => {
+       console.error('Error al eliminar el estudiante', err);
+     }
+    })
+   }
 
   ngOnInit(): void {
-    this.teachersService.getTeachers().subscribe({
-      next: (teachers) => {
-        this.teachers = teachers;
-        this.dataSource = new MatTableDataSource(this.teachers)
-      },
-      error: (err) => {console.log(err)},
-    })
+   this.loadTeachers();
   }
 
   openModal(editingTeacher?: ITeacher): void {
-
     this.matDialog
-      .open(TeacherModalComponent, { data: editingTeacher ? { ...editingTeacher } : undefined, })
+      .open(TeacherModalComponent, {
+        data: editingTeacher ? { ...editingTeacher } : undefined,
+      })
       .afterClosed()
       .subscribe({
         next: (res: ITeacher) => {
           if (res) {
             console.log(res);
             if (editingTeacher) {
-              console.log(editingTeacher);
-          
-              Object.assign(editingTeacher, res);
-          
+              this.teachersService.updateTeacher(editingTeacher.id, res);
+
               this.dataSource = new MatTableDataSource(this.teachers);
             } else {
-              const currentTime = new Date().getTime();
-              console.log(res);
-              res.id = currentTime;
-              this.teachers = [...this.teachers, res];
-              this.dataSource = new MatTableDataSource(this.teachers);
+    
+              this.addNewTeacher(res);
+              this.updateDataSource();
             }
-           
           }
         },
       });
   }
 
+  updateDataSource(): void {
+    this.dataSource = new MatTableDataSource(this.teachers);
+  }
 }

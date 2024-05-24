@@ -13,34 +13,46 @@
 </div>
 <div>
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!-- Position Column -->
+        
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
         </ng-container>
       
-        <!-- Name Column -->
         <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef> Nombre porfesor </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} {{element.lastName}} </mat-cell>
         </ng-container>
       
-        <!-- Weight Column -->
         <ng-container matColumnDef="email">
           <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
         </ng-container>
       
-        <!-- Symbol Column -->
         <ng-container matColumnDef="taughtSubjects">
           <mat-header-cell *matHeaderCellDef> Materias </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.taughtSubjects}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="edit">
-            <mat-header-cell *matHeaderCellDef> Editar / ver </mat-header-cell>
-            <mat-cell *matCellDef="let element">  </mat-cell>
-          </ng-container>
+          <mat-header-cell *matHeaderCellDef>Editar</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+              <mat-icon>expand_circle_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openModal(element)">
+                Editar <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-menu-item (click)="onDelete(element.id)">
+                Eliminar <mat-icon color="warn">delete_forever</mat-icon>
+              </button>
+              <button mat-menu-item>
+                <mat-icon color="primary">list_alt</mat-icon> Ver Perfil
+              </button>
+            </mat-menu>
+          </mat-cell>
+        </ng-container>
       
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

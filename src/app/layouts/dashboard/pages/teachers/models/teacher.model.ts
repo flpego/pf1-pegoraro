@@ -1,6 +1,6 @@
 
 export interface ITeacher {
-    id: number,
+    id: string,
     name: string,
     lastName: string,
     email: string,
