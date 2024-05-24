@@ -12,7 +12,7 @@ import { StudentDetailsComponent } from './components/student-details/student-de
   styleUrl: './students.component.scss',
 })
 export class StudentsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'email', 'edit'];
+  displayedColumns: string[] = ['id', 'name', 'email','edit'];
   dataSource!: MatTableDataSource<IStudent>;
   students: IStudent[] = [];
   constructor(

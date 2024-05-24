@@ -16,7 +16,7 @@ export class StudentDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['nombre', 'nota', 'fecha'];
   dataSource = new MatTableDataSource<IGrade>();
-
+  grades:IGrade[] = [];
   constructor(
     private fb: FormBuilder,
     private studentService: StudentsService,
@@ -70,13 +70,19 @@ export class StudentDetailsComponent implements OnInit {
       this.studentService.getStudentById(id).subscribe({
         next: (student) => {
           this.student = student;
+          this.grades = student.grades
           this.dataSource = new MatTableDataSource(student.grades);
-          console.log('Estudiante cargado:', this.student);
+          console.log(this.grades)
+          this.calculateAverage()
         },
         error: (err) => {
           console.error('Error al cargar el estudiante', err);
         },
       });
     }
+  }
+
+  calculateAverage() {
+   return this.grades.reduce((acc, total) => acc + total.grade, 0) / this.grades.length 
   }
 }

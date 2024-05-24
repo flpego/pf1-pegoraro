@@ -1,58 +1,74 @@
-<ng-container *ngIf="student">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Nombre: {{ student.name }}</mat-card-title>
-      <mat-card-title>Apellido: {{ student.lastName }}</mat-card-title>
-      <mat-card-subtitle>Email: {{ student.email }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-      <h2>Añadir Calificación</h2>
-      <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()">
-        <label for="title">Título:</label>
-        <input id="title" formControlName="title" type="text" />
-        <div
-          *ngIf="
-            gradeForm.controls['title'].invalid &&
-            gradeForm.controls['title'].touched
-          "
-        >
-          <small>Título es requerido</small>
-        </div>
+<div class="student__modal__container">
+  <ng-container *ngIf="student">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Nombre: {{ student.name }}</mat-card-title>
+        <mat-card-title>Apellido: {{ student.lastName }}</mat-card-title>
+        <mat-card-subtitle>Email: {{ student.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions class="form__container">
+        <h2>Añadir Calificación</h2>
+        <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()">
+          <label for="title">Título:</label>
+          <input id="title" formControlName="title" type="text" />
+          <div
+            *ngIf="
+              gradeForm.controls['title'].invalid &&
+              gradeForm.controls['title'].touched
+            "
+          >
+            <small>Título es requerido</small>
+          </div>
 
-        <label for="grade">Calificación:</label>
-        <input id="grade" formControlName="grade" type="number" />
+          <label for="grade">Calificación:</label>
+          <input id="grade" formControlName="grade" type="number" />
 
-        <button  mat-button type="submit" [disabled]="gradeForm.invalid">
-          Añadir Calificación
-        </button>
-      </form>
-    </mat-card-actions>
-  </mat-card>
+          <button
+            color="primary"
+            mat-button
+            type="submit"
+            [disabled]="gradeForm.invalid"
+          >
+            Añadir Calificación
+          </button>
+        </form>
+      </mat-card-actions>
+    </mat-card>
+    <div class="scrolleable">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Título</th>
+          <td mat-cell *matCellDef="let grade">{{ grade.title }}</td>
+          <td mat-footer-cell *matFooterCellDef>Promedio</td>
+        </ng-container>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef> Título </th>
-      <td mat-cell *matCellDef="let grade"> {{grade.title}} </td>
-    </ng-container>
+        <ng-container matColumnDef="nota">
+          <th mat-header-cell *matHeaderCellDef>Calificación</th>
+          <td
+            mat-cell
+            *matCellDef="let grade"
+            [ngClass]="grade.grade >= 66 ? 'green' : 'red'"
+          >
+            {{ grade.grade }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef>{{ calculateAverage() }}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="nota">
-      <th mat-header-cell *matHeaderCellDef> Calificación </th>
-      <td mat-cell *matCellDef="let grade"> {{grade.grade}} </td>
-    </ng-container>
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>Fecha</th>
+          <td mat-cell *matCellDef="let grade">{{ grade.createdAt | date }}</td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <!-- metodo para calcular promedio -->
 
-    <ng-container matColumnDef="fecha">
-      <th mat-header-cell *matHeaderCellDef> Fecha </th>
-      <td mat-cell *matCellDef="let grade"> {{grade.createdAt | date}} </td>
-    </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      </table>
+    </div>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-
-
-</ng-container>
-
-<ng-container *ngIf="!student">
-  <p>Cargando detalles del estudiante...</p>
-</ng-container>
+  <ng-container *ngIf="!student">
+    <p>Cargando detalles del estudiante...</p>
+  </ng-container>
+</div>

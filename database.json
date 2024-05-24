@@ -10,7 +10,6 @@
       "lastName": "perez",
       "email": "asd@asd.com",
       "grades": [
-        3,
         {
           "title": "tp 1",
           "grade": 99,
@@ -20,6 +19,21 @@
           "title": "tarea 1",
           "grade": 45,
           "createdAt": "2024-05-22T20:24:20.077Z"
+        },
+        {
+          "title": "tarea 2",
+          "grade": 66,
+          "createdAt": "2024-05-23T23:47:10.341Z"
+        },
+        {
+          "title": "final",
+          "grade": 78,
+          "createdAt": "2024-05-24T00:57:01.207Z"
+        },
+        {
+          "title": "tarea 3",
+          "grade": 56,
+          "createdAt": "2024-05-24T00:58:46.249Z"
         }
       ],
       "id": "386f"
@@ -30,7 +44,11 @@
       "lastName": "asd",
       "email": "text@asdas.com",
       "grades": [
-        5
+        {
+          "title": "tp1",
+          "grade": 98,
+          "createdAt": "2024-05-23T23:35:30.861Z"
+        }
       ]
     }
   ],

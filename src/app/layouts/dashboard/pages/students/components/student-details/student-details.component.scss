@@ -1,0 +1,47 @@
+.mat-mdc-table {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.mat-column-name {
+    height: 100px;
+}
+.student__modal__container {
+    width: 700px;
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;
+}
+.scrolleable{
+    max-height: calc(100vh - 200px); 
+    overflow-y: auto; 
+}
+.form__container {
+    display: flex;
+    flex-direction: column;
+    h2 {
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        input {
+            padding: 5px 15px;
+            width: 90%;
+            font-size: 1rem;
+        }
+        button {
+            margin: 0.5rem;
+            color: rgb(49, 49, 214);
+            background-color: rgba(131, 255, 255, 0.783);
+        }
+    }
+}
+
+.red {
+    color: rgb(243, 17, 17);
+}
+
+.green {
+    color: rgb(0, 161, 0);
+}
