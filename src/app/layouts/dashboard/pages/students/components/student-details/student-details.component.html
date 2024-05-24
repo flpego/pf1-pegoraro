@@ -1,10 +1,16 @@
 <div class="student__modal__container">
   <ng-container *ngIf="student">
-    <mat-card>
+    <mat-card class="grid__container">
       <mat-card-header>
-        <mat-card-title>Nombre: {{ student.name }}</mat-card-title>
-        <mat-card-title>Apellido: {{ student.lastName }}</mat-card-title>
-        <mat-card-subtitle>Email: {{ student.email }}</mat-card-subtitle>
+        <div class="d-flex">
+          <mat-card-title
+            >Nombre: {{ student.name | uppercase }}</mat-card-title
+          >
+          <mat-card-title
+            >Apellido: {{ student.lastName | uppercase }}</mat-card-title
+          >
+          <mat-card-subtitle>Email: {{ student.email }}</mat-card-subtitle>
+        </div>
       </mat-card-header>
       <mat-card-actions class="form__container">
         <h2>Añadir Calificación</h2>
@@ -21,16 +27,24 @@
           </div>
 
           <label for="grade">Calificación:</label>
-          <input id="grade" formControlName="grade" type="number" />
+          <input
+            id="grade"
+            formControlName="grade"
+            type="number"
+            class="input__grade"
+          />
 
-          <button
-            color="primary"
-            mat-button
-            type="submit"
-            [disabled]="gradeForm.invalid"
+          <div
+            matTooltip="Debes completar los campos primero"
+            [matTooltipDisabled]="!gradeForm.invalid"
           >
-            Añadir Calificación
-          </button>
+            <button mat-button type="submit" [disabled]="gradeForm.invalid"     [ngClass]="{
+              'enabled': !gradeForm.invalid,
+              'disabled': gradeForm.invalid
+            }">
+              Añadir Calificación
+            </button>
+          </div>
         </form>
       </mat-card-actions>
     </mat-card>
@@ -51,6 +65,8 @@
           >
             {{ grade.grade }}
           </td>
+          <!-- metodo para calcular promedio -->
+
           <td mat-footer-cell *matFooterCellDef>{{ calculateAverage() }}</td>
         </ng-container>
 
@@ -59,7 +75,17 @@
           <td mat-cell *matCellDef="let grade">{{ grade.createdAt | date }}</td>
           <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
-        <!-- metodo para calcular promedio -->
+
+        <ng-container matColumnDef="borrar">
+          <th mat-header-cell *matHeaderCellDef>Borrar</th>
+          <td mat-cell *matCellDef="let grade" >
+            <button (click)="deleteGrade(grade.createdAt)">
+
+              <mat-icon color="warn">delete_forever</mat-icon>
+            </button>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

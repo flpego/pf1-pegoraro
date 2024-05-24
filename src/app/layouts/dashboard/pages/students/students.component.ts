@@ -32,9 +32,11 @@ export class StudentsComponent implements OnInit {
       .subscribe({
         next: (res: IStudent) => {
           if (res) {
+            console.log(res)
             if (editingStudent) {
               this.updateStudent(editingStudent.id, res);
             } else {
+              res.grades = [];
               this.addNewStudent(res);
             }
           }
@@ -53,7 +55,7 @@ export class StudentsComponent implements OnInit {
         console.log(res);
         this.students = res;
         console.log(this.students);
-        this.dataSource = new MatTableDataSource(this.students);
+        this.updateDataSource();
       },
       error: (err) => {
         //en un futuro, manjejo de errores
@@ -70,7 +72,7 @@ export class StudentsComponent implements OnInit {
     this.studentsService.addStudent(newStudent).subscribe({
       next: (newStudentData) => {
         this.students = [...this.students, newStudent];
-        this.updateDataSource();
+        this.loadStudents();
       },
     });
   }

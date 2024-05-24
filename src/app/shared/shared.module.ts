@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import {MatListModule} from '@angular/material/list'
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     //declaracion de Pipes
@@ -36,6 +37,7 @@ import {MatListModule} from '@angular/material/list'
     MatCardModule,
     MatTableModule,
     MatListModule,
+    MatTooltipModule,
     //importaciones de angular
     ReactiveFormsModule,
     //importaciones de directivas y pipes

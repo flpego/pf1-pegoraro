@@ -14,9 +14,9 @@ export class StudentDetailsComponent implements OnInit {
   student: IStudent | null = null;
   gradeForm: FormGroup;
 
-  displayedColumns: string[] = ['nombre', 'nota', 'fecha'];
+  displayedColumns: string[] = ['nombre', 'nota', 'fecha', 'borrar'];
   dataSource = new MatTableDataSource<IGrade>();
-  grades:IGrade[] = [];
+  grades: IGrade[] = [];
   constructor(
     private fb: FormBuilder,
     private studentService: StudentsService,
@@ -48,10 +48,7 @@ export class StudentDetailsComponent implements OnInit {
               this.student = updatedStudent;
               this.dataSource = new MatTableDataSource(updatedStudent.grades);
 
-              console.log(
-                'Estudiante actualizado con nueva calificación:',
-                this.student
-              );
+              this.calculateAverage();
               this.gradeForm.reset();
             },
             error: (err) => {
@@ -70,10 +67,10 @@ export class StudentDetailsComponent implements OnInit {
       this.studentService.getStudentById(id).subscribe({
         next: (student) => {
           this.student = student;
-          this.grades = student.grades
+          this.grades = student.grades;
           this.dataSource = new MatTableDataSource(student.grades);
-          console.log(this.grades)
-          this.calculateAverage()
+          console.log(this.grades);
+          this.calculateAverage();
         },
         error: (err) => {
           console.error('Error al cargar el estudiante', err);
@@ -83,6 +80,34 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   calculateAverage() {
-   return this.grades.reduce((acc, total) => acc + total.grade, 0) / this.grades.length 
+    if (this.student?.grades.length === 0) {
+      return 'No hay calificaciones';
+    } else {
+      return (
+        this.grades.reduce((acc, total) => acc + total.grade, 0) /
+        this.grades.length
+      );
+    }
+  }
+
+  deleteGrade(createdAt: string) {
+    if (this.student) {
+      console.log(createdAt);
+      const index = this.student.grades.findIndex(
+        (grade) => new Date(grade.createdAt).toDateString() === createdAt
+      );
+      console.log(index);
+      if (index === -1) {
+        this.student.grades.splice(index, 1);
+        this.studentService
+          .editStudent(this.student.id, this.student)
+          .subscribe({
+            next: (updatedStudent) => {
+              this.student = updatedStudent;
+              this.dataSource = new MatTableDataSource(updatedStudent.grades);
+            },
+          });
+      }
+    }
   }
 }

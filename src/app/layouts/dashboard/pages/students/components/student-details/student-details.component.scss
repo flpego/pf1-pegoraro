@@ -1,6 +1,14 @@
+.grid__container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    background-color: #e2f6e0;
+    color: #000;
+}
+
 .mat-mdc-table {
     width: 100%;
-    max-height: 500px;
     overflow: auto;
 }
 
@@ -8,32 +16,72 @@
     height: 100px;
 }
 .student__modal__container {
-    width: 700px;
-    max-height: calc(100vh - 100px); 
+    width: 100%;
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
 }
-.scrolleable{
-    max-height: calc(100vh - 200px); 
-    overflow-y: auto; 
+.scrolleable {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
+
+.mat-mdc-card-header {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-mdc-card-header-text {
+    display: flex;
+}
+.mat-mdc-card-subtitle {
+    font-size: 1rem;
+    color: #000;
+}
+
 .form__container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     h2 {
         text-align: center;
+        font-size: 1rem;
     }
     form {
         display: flex;
         flex-direction: column;
+        label {
+            margin: 5px;
+        }
+        .input__grade {
+            width: 40%;
+        }
         input {
             padding: 5px 15px;
             width: 90%;
             font-size: 1rem;
+            outline: none;
+            border: none;
+            border-radius: 8px;
+            background-color: rgb(153, 255, 153);
         }
         button {
-            margin: 0.5rem;
-            color: rgb(49, 49, 214);
-            background-color: rgba(131, 255, 255, 0.783);
+            margin: 10px 0;
+      
+        }
+        button.enabled{
+            background-color: rgba(71, 212, 50, 0.834);
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(34, 255, 0, 0.834);
+                color: rgb(0, 0, 246);
+
+
+            }
+
+        }
+        button.disabled {
+            color: rgb(60, 60, 73);
+            background-color: rgba(206, 223, 203, 0.783);
         }
     }
 }
@@ -44,4 +92,12 @@
 
 .green {
     color: rgb(0, 161, 0);
+}
+
+.d-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }

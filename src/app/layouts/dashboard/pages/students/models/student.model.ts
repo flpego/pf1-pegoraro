@@ -16,5 +16,5 @@ export interface CreateStudentPayload {
     name: string | null,
     lastName: string | null,
     email: string | null,
-    grades:IGrade[] | null,
+    grades:IGrade[],
 }

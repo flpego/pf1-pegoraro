@@ -20,13 +20,6 @@
           <input matInput formControlName="email" />
           <mat-error class="shadow-red ">{{emailControl?.errors| formsValidators}}</mat-error>
         </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Asignar Calificacion</mat-label>
-          <mat-select formControlName="selectedGrade">
-            <mat-option *ngFor="let grade of grades" [value]="grade">{{ grade }}</mat-option>
-          </mat-select>
-        </mat-form-field>
         
       </div>
     </form>

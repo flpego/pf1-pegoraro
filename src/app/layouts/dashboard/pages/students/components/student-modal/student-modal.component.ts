@@ -10,7 +10,6 @@ import { IStudent } from '../../models/student.model';
 })
 export class StudentModalComponent {
   studentsForm: FormGroup;
-  grades: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +29,7 @@ export class StudentModalComponent {
           Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
         ],
       ],
-      selectedGrade: [this.grades[0]]
+      grades: [data?.grades || []],
     });
 
     if (data) {
@@ -50,15 +49,11 @@ export class StudentModalComponent {
     return this.studentsForm.get('email');
   }
 
-
   onSaveEstudent(): void {
     if (this.studentsForm.invalid) {
       this.studentsForm.markAllAsTouched();
     } else {
       const formData = this.studentsForm.value;
-      const selectedGrade = formData.selectedGrade;
-      delete formData.selectedGrade; 
-      formData.grades = [selectedGrade]; 
       this.matDialogRef.close(formData);
     }
   }
