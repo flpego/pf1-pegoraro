@@ -110,4 +110,8 @@ export class StudentDetailsComponent implements OnInit {
       }
     }
   }
+
+  closeModal():void{
+    this.matDialogRef.close();
+  }
 }

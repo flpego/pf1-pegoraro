@@ -1,17 +1,18 @@
 <div class="auth__main__container">
-    <div>
-        <button (click)="toggleForm()" [ngClass]="{ 'active': !toggleFormViews }">
-          Registrarse
-        </button>
-        <button (click)="toggleForm()" [ngClass]="{ 'active': toggleFormViews }">
-          Ingresar
-        </button>
-      </div>
-
-  <div *ngIf="!toggleFormViews">
-    <app-register></app-register>
+  <div class="auth__header">
+    <button (click)="toggleForm()" [ngClass]="{ active: !toggleFormViews }" class="btn1">
+      Registrarse
+    </button>
+    <button (click)="toggleForm()" [ngClass]="{ active: toggleFormViews }" class="btn2">
+      Ingresar
+    </button>
   </div>
-  <div *ngIf="toggleFormViews">
-    <app-login></app-login>
+  <div class="forms__container">
+    <div *ngIf="!toggleFormViews">
+      <app-register></app-register>
+    </div>
+    <div *ngIf="toggleFormViews">
+      <app-login></app-login>
+    </div>
   </div>
 </div>

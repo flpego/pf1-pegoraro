@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="home__container">
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>Profesores</mat-card-title>
+          <mat-card-subtitle>Total porfesores: {{teachers.length}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <a routerLink="/dashboard/teachers">Ver</a>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Estudiantes</mat-card-title>
+          <mat-card-subtitle>Total estudiantes: {{students.length}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <a routerLink="/dashboard/students">Ver</a>
+        </mat-card-actions>
+      </mat-card>
+</div>

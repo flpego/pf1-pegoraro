@@ -6,7 +6,7 @@
     <li class="li__flex">
       <a routerLink="courses"><mat-icon>nature_people</mat-icon>Cursos</a>
     </li>
-    <li class="li__flex"  *ngIf="user?.role === 'ADMIN'">
+    <li class="li__flex"  *ngIf="user?.role === 'ADMIN' || user?.role === 'TEACHER'">
       <a routerLink="students"
         ><mat-icon>supervised_user_circle</mat-icon>Estudiantes</a
       >

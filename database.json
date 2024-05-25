@@ -9,28 +9,7 @@
       "name": "juan",
       "lastName": "perez",
       "email": "asd@asd.com",
-      "grades": [
-        {
-          "title": "tp 1",
-          "grade": 99,
-          "createdAt": "2024-05-22T20:10:22.566Z"
-        },
-        {
-          "title": "tarea 1",
-          "grade": 45,
-          "createdAt": "2024-05-22T20:24:20.077Z"
-        },
-        {
-          "title": "tarea 2",
-          "grade": 66,
-          "createdAt": "2024-05-23T23:47:10.341Z"
-        },
-        {
-          "title": "final",
-          "grade": 78,
-          "createdAt": "2024-05-24T00:57:01.207Z"
-        }
-      ],
+      "grades": [],
       "id": "386f"
     },
     {
@@ -73,6 +52,11 @@
           "title": "tp3",
           "grade": 89,
           "createdAt": "2024-05-24T20:07:06.982Z"
+        },
+        {
+          "title": "final",
+          "grade": 100,
+          "createdAt": "2024-05-25T22:37:19.769Z"
         }
       ]
     }
