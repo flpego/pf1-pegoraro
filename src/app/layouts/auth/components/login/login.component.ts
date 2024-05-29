@@ -11,8 +11,8 @@ import { AuthService } from '../../auth.service';
 export class LoginComponent {
   hide = true;
   loginForm: FormGroup;
-
   errorMessage: string | null = null; //implementar alerta de error
+  
   constructor(
     private loginFormBuilder: FormBuilder,
     private router: Router,
@@ -47,7 +47,6 @@ export class LoginComponent {
     this.authService.login(loginData).subscribe({
       next: (user) => {
         if (user) {
-          console.log('Login successful', user);
           this.router.navigateByUrl('/dashboard');
 
           this.errorMessage = null;
@@ -58,7 +57,7 @@ export class LoginComponent {
       },
       error: (error) => {
         console.error('Login failed', error);
-        this.errorMessage = 'An error occurred during login';
+        this.errorMessage = 'Ocurrio un error durante el login';
       },
       complete: () => {
         this.loginForm.reset();
@@ -66,26 +65,5 @@ export class LoginComponent {
     });
   }
 
-  loginUser() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (userData) => {
-          console.log(userData);
-          
-        },
-        error: (error) => {
-          this.errorMessage = error;
-          console.log(error);
-        },
-        complete: () => {
-          console.log('User Login completed');
-
-          this.loginForm.reset();
-        },
-      });
-    } else {
-      this.loginForm.markAllAsTouched();
-      alert('User y/o password incorrecta');
-    }
-  }
+ 
 }

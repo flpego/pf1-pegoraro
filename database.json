@@ -104,6 +104,51 @@
       "email": "carrod@test.com",
       "password": "1234ar",
       "role": "ADMIN"
+    },
+    {
+      "id": "1b14",
+      "name": "asd",
+      "lastName": "asd",
+      "userName": "asdad",
+      "role": "TEACHER",
+      "password": "asd123",
+      "passwordConfirm": "asd123"
+    },
+    {
+      "id": "ec5b",
+      "name": "jaoquin",
+      "lastName": "perez",
+      "userName": "joaperez",
+      "role": "STUDENT",
+      "password": "1234ar",
+      "passwordConfirm": "1234ar"
+    },
+    {
+      "id": "1b2f",
+      "name": "elon",
+      "lastName": "musk",
+      "userName": "elonm",
+      "role": "TEACHER",
+      "password": "1234ar",
+      "passwordConfirm": "1234ar"
+    },
+    {
+      "id": "9420",
+      "name": "asd",
+      "lastName": "asd",
+      "userName": "sdasd",
+      "role": "STUDENT",
+      "password": "asdasd",
+      "passwordConfirm": "asdasd"
+    },
+    {
+      "id": "2941",
+      "name": "test",
+      "lastName": "test",
+      "userName": "test",
+      "role": "ADMIN",
+      "password": "test12",
+      "passwordConfirm": "test12"
     }
   ]
 }

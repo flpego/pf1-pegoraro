@@ -10,7 +10,10 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { IUser } from '../dashboard/pages/users/models/user.model';
+import {
+  IUser,
+  CreateUserPayload,
+} from '../dashboard/pages/users/models/user.model';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -32,7 +35,7 @@ export class AuthService {
     return !!localStorage.getItem('user');
   }
 
-   getUserFromLocalStore(): IUser | null {
+  getUserFromLocalStore(): IUser | null {
     const user = localStorage.getItem('user');
     //expresion ternaria, si hay user...
     return user ? JSON.parse(user) : null;
@@ -72,6 +75,24 @@ export class AuthService {
     this.userData$.next(null);
     this.setUserToLocalStorage(null);
     this.router.navigate(['auth']);
+  }
+
+  //regsiter
+
+  resgisterNewUser(payload: CreateUserPayload): Observable<IUser | null> {
+    console.log(payload);
+    return this.httpClient.post<IUser>(`${this.baseUrl}/users`, payload).pipe(
+      map((user) => {
+        if (user) {
+          this.userData$.next(user);
+          this.loggedIn$.next(true);
+          this.setUserToLocalStorage(user);
+          return user;
+        } else {
+          return null;
+        }
+      })
+    );
   }
 
   //manejo de errores
