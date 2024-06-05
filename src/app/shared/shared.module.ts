@@ -16,6 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import {MatListModule} from '@angular/material/list'
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     //declaracion de Pipes
@@ -38,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTableModule,
     MatListModule,
     MatTooltipModule,
+    BrowserModule,
     //importaciones de angular
     ReactiveFormsModule,
     //importaciones de directivas y pipes

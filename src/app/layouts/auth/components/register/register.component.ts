@@ -18,6 +18,7 @@ export class RegisterComponent {
   hide = true;
   registerForm: FormGroup;
   errorMessage: string | null = null;
+  passwordMatchError: boolean = false;
   constructor(
     private registerFormBuilder: FormBuilder,
     private authService: AuthService,
@@ -35,14 +36,20 @@ export class RegisterComponent {
         password: ['', Validators.required],
         passwordConfirm: ['', Validators.required],
       },
-      { validators: this.passwordMatch }
+      { validators: this.passwordMatch.bind(this) }
     );
   }
 
   passwordMatch(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const passwordConfirm = control.get('passwordConfirm')?.value;
-    return password === passwordConfirm ? null : { mismatch: true };
+    if (password !== passwordConfirm) {
+      this.passwordMatchError = true;
+      return { mismatch: true };
+    } else {
+      this.passwordMatchError = false; 
+      return null;
+    }
   }
 
   get UserNameControl() {
@@ -62,25 +69,27 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    const registerFormValue = this.registerForm.value;
+    if (this.registerForm.valid && !this.passwordMatchError) {
+      const registerFormValue = this.registerForm.value;
 
-    this.authService.resgisterNewUser(registerFormValue).subscribe({
-      next: (newUser) => {
-        if (newUser) {
-          this.router.navigateByUrl('/dashboard');
-          this.errorMessage = null;
-        } else {
-          console.log('Login failed');
-          this.errorMessage = 'Usuario y/o contrasena incorrecta';
-        }
-      },
-      error: (error) => {
-        console.error('Error al registrar user', error);
-        this.errorMessage = 'ocurrio un error durante el registro';
-      },
-      complete: () => {
-        this.registerForm.reset();
-      },
-    });
+      this.authService.resgisterNewUser(registerFormValue).subscribe({
+        next: (newUser) => {
+          if (newUser) {
+            this.router.navigateByUrl('/dashboard');
+            this.errorMessage = null;
+          } else {
+            console.log('Login failed');
+            this.errorMessage = 'Usuario y/o contrasena incorrecta';
+          }
+        },
+        error: (error) => {
+          console.error('Error al registrar user', error);
+          this.errorMessage = 'ocurrio un error durante el registro';
+        },
+        complete: () => {
+          this.registerForm.reset();
+        },
+      });
+    }
   }
 }

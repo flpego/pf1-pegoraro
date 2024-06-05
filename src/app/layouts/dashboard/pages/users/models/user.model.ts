@@ -12,5 +12,6 @@ export interface CreateUserPayload {
   lastName: string | null;
   userName: string | null;
   password: string | null;
+  passwordConfirm: string | null;
   role: 'STUDENT' | 'TEACHER' | 'ADMIN';
 }
