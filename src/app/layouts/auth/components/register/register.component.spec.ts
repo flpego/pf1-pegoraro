@@ -3,7 +3,8 @@ import { RegisterComponent } from './register.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
+
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { CreateUserPayload } from '../../../dashboard/pages/users/models/user.model';

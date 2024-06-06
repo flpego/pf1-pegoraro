@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { LoginRequest } from './models/loginRequest.model';
+import { LoginRequest } from '../models/loginRequest.model';
 import {
   BehaviorSubject,
   Observable,
@@ -13,7 +13,7 @@ import {
 import {
   IUser,
   CreateUserPayload,
-} from '../dashboard/pages/users/models/user.model';
+} from '../../dashboard/pages/users/models/user.model';
 import { Router } from '@angular/router';
 
 @Injectable({

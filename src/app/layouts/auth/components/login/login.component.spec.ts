@@ -3,7 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { LoginComponent } from './login.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../services/auth.service';
+
 import { Router } from '@angular/router';
 import { IUser } from '../../../dashboard/pages/users/models/user.model';
 import { of } from 'rxjs';
@@ -30,8 +31,7 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
 
     component = fixture.componentInstance;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>; 
+
     fixture.detectChanges()
   });
   
