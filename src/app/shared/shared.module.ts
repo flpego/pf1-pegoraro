@@ -39,7 +39,6 @@ import { BrowserModule } from '@angular/platform-browser';
     MatTableModule,
     MatListModule,
     MatTooltipModule,
-    BrowserModule,
     //importaciones de angular
     ReactiveFormsModule,
     //importaciones de directivas y pipes

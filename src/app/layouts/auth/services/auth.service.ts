@@ -41,7 +41,7 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
-  private setUserToLocalStorage(user: IUser | null) {
+   setUserToLocalStorage(user: IUser | null) {
     return user
       ? localStorage.setItem('user', JSON.stringify(user))
       : localStorage.removeItem('user');

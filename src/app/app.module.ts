@@ -8,9 +8,16 @@ import { DashboardModule } from './layouts/dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, DashboardModule, AppRoutingModule, SharedModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    DashboardModule,
+    AppRoutingModule,
+    SharedModule,
+    HttpClientModule,
+  ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
