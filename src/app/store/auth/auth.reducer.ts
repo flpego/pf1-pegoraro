@@ -1,38 +1,35 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import * as AuthActions from './auth.actions';
+import { createReducer, on } from '@ngrx/store';
+import { IUser } from '../../layouts/dashboard/pages/users/models/user.model';
+import { authActions } from './auth.actions';
 
 export interface AuthState {
-  user: any | null;
-  error: string | null;
-  loading: boolean;
+  //si user no hace login, authUser es detipo null
+  authUser: null | IUser;
+  error: any;
 }
 
-export const initialState: AuthState = {
-  user: null,
+const initialState: AuthState = {
+  authUser: null,
   error: null,
-  loading: false,
 };
 
-const _authReducer = createReducer(
+export const authFixtureName = 'auth';
+
+export const authReducer = createReducer(
   initialState,
-  on(AuthActions.login, (state) => ({
+  on(authActions.login, (state) => ({
     ...state,
-    loading: true,
+    authUser: null,
     error: null,
   })),
-  on(AuthActions.loginSuccess, (state, { user }) => ({
+  on(authActions.loginSuccess, (state, { user }) => ({
     ...state,
-    user,
-    loading: false,
+    authUser: user,
     error: null,
   })),
-  on(AuthActions.loginFailure, (state, { error }) => ({
+  on(authActions.loginFail, (state, { error }) => ({
     ...state,
-    loading: false,
+    authUser: null,
     error,
   }))
 );
-
-export function authReducer(state: AuthState | undefined, action: Action) {
-  return _authReducer(state, action);
-}

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { authActions } from '../../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent {
   constructor(
     private loginFormBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   ) {
     this.loginForm = this.loginFormBuilder.group({
       userName: [
@@ -43,6 +46,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    // this.store.dispatch(authActions.login)
     const loginData = this.loginForm.value;
     this.authService.login(loginData).subscribe({
       next: (user) => {
